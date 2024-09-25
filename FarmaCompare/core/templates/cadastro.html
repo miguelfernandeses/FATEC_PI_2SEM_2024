@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body>
+    <div class="wrapper">   
+        <main id="grad3" style="text-align:center;"> 
+            <div class="container">
+                <div class="login containercentro">
+                    <h2>Cadastro de Cliente</h2>
+                    <form method="post" action="{% url 'core:cadastro' %}" class="mx-1 mx-md-4" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="d-flex flex-row align-items-center mb-2">
+                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                            <div class="form-outline flex-fill mb-0">
+                                <label class="form-label" for="{{ form_cadastro.nome.id_for_label }}" style="color: rgb(255, 255, 255);">Nome</label>
+                                {{ form_cadastro.nome }}
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row align-items-center mb-2">
+                            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                            <div class="form-outline flex-fill mb-0">
+                                <label class="form-label" for="{{ form_cadastro.email.id_for_label }}" style="color: rgb(255, 255, 255);">Email</label>
+                                {{ form_cadastro.email }}
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row align-items-center mb-2">
+                            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                            <div class="form-outline flex-fill mb-0">
+                                <label class="form-label" for="{{ form_cadastro.senha.id_for_label }}" style="color: rgb(255, 255, 255);">Senha</label>
+                                {{ form_cadastro.senha }}
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                            <button type="submit" class="buttonenviarcadastro">Cadastrar-se</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+        
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXlRYoWsx9gDp6fxczd9TYU8C4IIQV9v2jYZxtfqHV+0Szlt8f0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eycH8GhsBxxdoGd0EDG5zfoV5ZCvM4B5RI5V2D5Hyy8F2Cp2e7CVgLP" crossorigin="anonymous"></script>
+</body>
+</html>
