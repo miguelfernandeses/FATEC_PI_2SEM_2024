@@ -5,43 +5,53 @@ from core.forms import LoginForm
 from django.shortcuts import resolve_url as r
 
 class LoginViewTestCase(TestCase):
+
     def setUp(self):
         self.client = Client()
         self.user = CadastroModel.objects.create(
             email='joao.silva@example.com',
-            senha='senha123',
+            senha='Senha.123',  # Corrigido para a senha válida usada no login
             nome='João Silva',
         )
-        self.user.save()
 
     def test_login_view_success(self):
+        """Verifica se o login bem-sucedido retorna o status correto."""
         response = self.client.post(reverse('core:login'), data={
             'email': 'joao.silva@example.com',
-            'password': 'Senha.123'
+            'password': 'Senha.123'  # A senha deve ser a mesma usada ao criar o usuário
         })
-        self.assertEqual(response.status_code, 200) 
-        #self.assertTrue(self.client.session.get(self.user))
+        self.assertEqual(response.status_code, 302)  # Redirecionamento após login bem-sucedido
 
-    '''def test_login_view_failure(self):
+    def test_login_view_failure(self):
+        """Verifica se o login falha com credenciais inválidas."""
         response = self.client.post(reverse('core:login'), data={
             'email': 'invalid@email.com',
             'password': 'wrongpassword'
         })
-        self.assertEqual(response.status_code, 200)  # Status code 200 indica uma resposta bem-sucedida, mas sem redirecionamento
-        #self.assertFalse(self.client.session.get('user_id'))  # Verifica se a sessão do usuário não foi iniciada
-    '''
+        self.assertEqual(response.status_code, 200)  # Status 200 indica que a página de login foi retornada
+        # Verifica se a sessão do usuário não foi iniciada
+        self.assertNotIn('_auth_user_id', self.client.session)  # Verifica se o usuário não está autenticado
+
+
 class LoginFormTestCase(TestCase):
+
     def test_campos_utilizados_login(self):
+        """Verifica se os campos esperados estão presentes no formulário de login."""
         form = LoginForm()
         expected = ['email', 'password']
         self.assertSequenceEqual(expected, list(form.fields))
 
-class Update_GET_Test(TestCase):
+
+class UpdateGETTest(TestCase):
+
     def setUp(self):
+        self.client = Client()  # Adiciona Client no setUp
         self.resp = self.client.get(r('core:login'), follow=True)
 
     def test_status_code(self):
-        self.assertEqual(self.resp.status_code , 200)
-          
+        """Verifica se a página de login retorna o status correto."""
+        self.assertEqual(self.resp.status_code, 200)
+
     def test_template_used(self):
+        """Verifica se o template correto é usado na resposta."""
         self.assertTemplateUsed(self.resp, 'login.html')
