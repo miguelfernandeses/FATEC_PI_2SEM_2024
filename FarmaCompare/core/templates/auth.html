@@ -11,48 +11,48 @@
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container">
+    <div class="container"> 
         <div class="content first-content">
             <div class="first-column">
-                <h2 class="title title-primary">welcome back!</h2>
-                <p class="description description-primary">To keep connected with us</p>
-                <p class="description description-primary">please login with your personal info</p>
-                <button id="signin" class="btn btn-primary">sign in</button>
+                <h2 class="title title-primary">bem-vindo de volta!</h2>
+                <p class="description description-primary">Para continuar conectado conosco</p>
+                <p class="description description-primary">por favor, faça login com suas informações pessoais</p>
+                <button id="signin" class="btn btn-primary">entrar</button>
             </div>    
             <div class="second-column">
-                <h2 class="title title-second">create account</h2>
+                <h2 class="title title-second">criar conta</h2>
                 
-                <p class="description description-second">Use your email for registration:</p>
+                <p class="description description-second">Use seu e-mail para registro:</p>
                 <form method="POST" action="{% url 'core:auth' %}">
                     {% csrf_token %}
                     <label class="label-input" for="">
                         <i class="far fa-user icon-modify"></i>
-                        <input type="text" name="nome" placeholder="Name" required>
+                        <input type="text" name="nome" placeholder="Nome" required>
                     </label>
                     
                     <label class="label-input" for="">
                         <i class="far fa-envelope icon-modify"></i>
-                        <input type="email" name="email" placeholder="Email" required>
+                        <input type="email" name="email" placeholder="E-mail" required>
                     </label>
                     
                     <label class="label-input" for="">
                         <i class="fas fa-lock icon-modify"></i>
-                        <input type="password" name="senha" placeholder="Password" required>
+                        <input type="password" name="senha" placeholder="Senha" required>
                     </label>
                     
                     <button class="btn btn-second">Cadastrar</button>        
                 </form>
-            </div><!-- second column -->
-        </div><!-- first content -->
+            </div>
+        </div>
         <div class="content second-content">
             <div class="first-column">
-                <h2 class="title title-primary">hello, friend!</h2>
-                <p class="description description-primary">Enter your personal details</p>
-                <p class="description description-primary">and start journey with us</p>
-                <button id="signup" class="btn btn-primary">sign up</button>
+                <h2 class="title title-primary">olá, amigo!</h2>
+                <p class="description description-primary">Insira suas informações pessoais</p>
+                <p class="description description-primary">e comece sua jornada conosco</p>
+                <button id="signup" class="btn btn-primary">cadastrar</button>
             </div>
             <div class="second-column">
-                <h2 class="title title-second">sign in to developer</h2>
+                <h2 class="title title-second">entrar como usuário</h2>
                 <div class="social-media">
                     <ul class="list-social-media">
                         <a class="link-social-media" href="#">
@@ -71,25 +71,25 @@
                             </li>
                         </a>
                     </ul>
-                </div><!-- social media -->
-                <p class="description description-second">or use your email account:</p>
+                </div>
+                <p class="description description-second">ou use sua conta de e-mail:</p>
                 <form method="POST" action="{% url 'core:auth' %}">
                     {% csrf_token %}
                     <label class="label-input" for="">
                         <i class="far fa-envelope icon-modify"></i>
-                        <input type="email" name="email" placeholder="Email" required>
+                        <input type="email" name="email" placeholder="E-mail" required>
                     </label>
                 
                     <label class="label-input" for="">
                         <i class="fas fa-lock icon-modify"></i>
-                        <input type="password" name="password" placeholder="Password" required>
+                        <input type="password" name="password" placeholder="Senha" required>
                     </label>
                 
-                    <a class="password" href="#">forgot your password?</a>
-                    <button class="btn btn-second">sign in</button>
+                    <a class="password" href="#">esqueceu sua senha?</a>
+                    <button class="btn btn-second">entrar</button>
                 </form>
-            </div><!-- second column -->
-        </div><!-- second-content -->
+            </div>
+        </div>
     </div>
     <script src="{% static 'js/app.js' %}"></script>
 </body>

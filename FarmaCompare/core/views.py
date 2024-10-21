@@ -11,6 +11,9 @@ def index(request):
 
 logger = logging.getLogger(__name__)
 
+def main(request):
+    return render(request, "main.html")
+
 def auth_view(request):
     if request.method == "POST":
         if 'nome' in request.POST:  # Cadastro
