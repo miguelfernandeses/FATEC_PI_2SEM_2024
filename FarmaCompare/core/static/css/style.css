@@ -17,14 +17,14 @@ body {
 }
 
 .label-input {
-    background-color: #ecf0f1; /* Cor de fundo suave */
+    background-color: #ecf0f1;
     display: flex;
     align-items: center;
-    margin: 15px 0; /* Mais espaço entre os labels */
-    padding: 1px; /* Espaçamento interno */
-    border-radius: 10px; /* Bordas arredondadas */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Efeitos de transição */
-    border: 1px solid #bdc3c7; /* Borda */
+    margin: 15px 0;
+    padding: 1px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #bdc3c7;
 }
 
 .label-input:hover {
@@ -225,21 +225,20 @@ input:-webkit-autofill
 .form input {
     height: 45px;
     width: 100%;
-    border: 1px solid #bdc3c7; /* Adiciona uma borda */
-    border-radius: 5px; /* Bordas arredondadas */
-    padding: 10px; /* Espaçamento interno */
-    transition: border-color 0.3s; /* Transição para o foco */
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    padding: 10px;
+    transition: border-color 0.3s;
 }
 
 .form input:focus {
-    border-color: #023E8A; /* Muda a cor da borda quando em foco */
-    outline: none; /* Remove contorno padrão do navegador */
+    border-color: #023E8A;
+    outline: none;
 }
 
 .btn {
-    transition: background-color 0.3s ease, color 0.3s ease; /* Adiciona transições */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
-
 
 
 
@@ -260,14 +259,13 @@ input:-webkit-autofill
     border-bottom-left-radius: 0;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
-    animation: slidein 1.3s; /*MODIFIQUEI DE 3s PARA 1.3s*/
+    animation: slidein 1.3s; 
 
     z-index: 12;
 }
 
 .sign-up-js .content::before {
-    animation: slideout 1.3s; /*MODIFIQUEI DE 3s PARA 1.3s*/
-
+    animation: slideout 1.3s; 
     z-index: 12;
 }
 
