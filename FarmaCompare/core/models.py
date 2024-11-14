@@ -1,20 +1,39 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 class CadastroModel(models.Model):
-    nome = models.CharField('Nome', max_length=200)
     email = models.EmailField('Email')
+    razao_social = models.CharField(max_length=150, null=True, blank=True)
+    cnpj = models.CharField(max_length=30, unique=True, null=True, blank=True)
+    telefone = models.CharField(max_length=30, null=True, blank=True)
+    endereco = models.CharField(max_length=255, null=True, blank=True)
     senha = models.CharField('Senha', max_length=50)
+    
 
     def __str__(self):
-        return self.nome
+        return self.razao_social
     
 class Cliente(models.Model):
-    nome = models.CharField(max_length=100)
+    razao_social = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
     senha = models.CharField(max_length=255)
+
+
+class Plano(models.Model):
+    PLANO_CHOICES = [
+        (1, 'Grátis'),
+        (2, 'Mensal'),
+        (3, 'Anual'),
+    ]
+
     
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    plano = models.IntegerField(choices=PLANO_CHOICES, default=1)
+    data_assinatura = models.DateTimeField(auto_now_add=True)
+
     def __str__(self):
-        return self.nome
+        return f"{self.user.username} - {self.get_plano_display()}"
     
 class Produto(models.Model):
     nome_farmacia = models.CharField(max_length=255)

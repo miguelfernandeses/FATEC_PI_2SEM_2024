@@ -3,7 +3,7 @@ body {
     font-family: 'Roboto', sans-serif;
   }
 
-  .header {
+.header {
     background-color: transparent;
     transition: background-color 0.3s ease, position 0.3s ease;
     width: 100%;
@@ -45,21 +45,21 @@ body {
 }
 
 .sidebar-menu {
-  display: none; /* Inicialmente oculto */
-  position: absolute; /* Para que o menu fique sobre outros elementos */
-  background-color: #003366; /* Cor de fundo */
-  color: white; /* Cor do texto */
-  padding: 10px; /* Espaçamento interno */
-  border-radius: 5px; /* Bordas arredondadas */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Sombra */
-  z-index: 1000; /* Para garantir que o menu fique acima de outros elementos */
-  margin-top: 5px; /* Espaçamento em relação ao botão que o aciona */
-  left: 0; /* Alinha à esquerda do elemento que o aciona */
+  display: none;
+  position: absolute; 
+  background-color: #003366; 
+  color: white; 
+  padding: 10px; 
+  border-radius: 5px; 
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  margin-top: 5px; 
+  left: 0;
 }
 
 .sidebar-menu ul {
-  list-style-type: none; /* Remove as marcas de lista */
-  padding: 0; /* Remove o preenchimento */
+  list-style-type: none; 
+  padding: 0; 
 }
 
 .sidebar-menu a {
@@ -162,7 +162,7 @@ body {
     z-index: 2; 
 }
 .hero h1 {
-  font-size: 3rem;
+  font-size: 3rem; 
   margin-left: 50px;
 }
 

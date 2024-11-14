@@ -33,7 +33,7 @@
                         <div class="sidebar-menu" id="sidebar-menu">
                             <ul>
                                 <li><a href="{% url 'core:main' %}"><i class="bi bi-person-circle"></i> Ver Minha Conta</a></li>
-                                <li><a href="{% url 'core:auth' %}"><i class="bi bi-arrow-up-circle"></i> Subir Plano</a></li>
+                                <li><a href="{% url 'core:card' %}"><i class="bi bi-arrow-up-circle"></i> Subir Plano</a></li>
                                 <li><a href="{% url 'core:logout' %}"><i class="bi bi-box-arrow-right"></i> Sair</a></li>
                             </ul>
                         </div>
@@ -102,9 +102,11 @@
         <div class="plan">
             <h3 class="plan-title">Grátis</h3>
             <p class="plan-price">R$ 0,00 / Mês</p>
-            <a href="{% url 'core:auth' %}">
-                <button>Adquirir Plano</button>
-            </a>
+            <form action="{% url 'core:escolher_plano' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="plano_id" value="1">
+                <button type="submit">Adquirir Plano</button>
+            </form>
             <ul class="divider"></ul>
             <ul class="plan-details">
                 <li>Limite de 10 pesquisas</li>
@@ -114,9 +116,11 @@
         <div class="plan">
             <h3 class="plan-title">Mensal</h3>
             <p class="plan-price">R$ 49,90 / Mês</p>
-            <a href="{% url 'core:auth' %}">
-                <button>Adquirir Plano</button>
-            </a>
+            <form action="{% url 'core:escolher_plano' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="plano_id" value="2">
+                <button type="submit">Adquirir Plano</button>
+            </form>
             <ul class="divider"></ul>
             <ul class="plan-details">
                 <li>Pesquisas ilimitadas</li>
@@ -130,9 +134,11 @@
             <h3 class="plan-title">Anual</h3>
             <p class="plan-price">R$ 42,90 / Mês</p>
             <p class="economize">Economize R$ 80,00</p>
-            <a href="{% url 'core:auth' %}">
-            <button class="plan-button">Adquirir Plano</button>
-            </a>
+            <form action="{% url 'core:escolher_plano' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="plano_id" value="3">
+                <button type="submit" class="plan-button">Adquirir Plano</button>
+            </form>
             <ul class="divider"></ul>
             <ul class="plan-details">
                 <li>Pesquisas ilimitadas</li>
@@ -143,6 +149,8 @@
             </ul>
         </div>
     </section>
+    
+    
     
 
     <footer class="footer">
@@ -172,6 +180,5 @@
     <script src="{% static 'js/header.js' %}"></script>
     <script src="{% static 'js/menu.js' %}"></script>
     <script src="{% static 'js/dropdown.js' %}"></script>
-
 </body>
 </html>
