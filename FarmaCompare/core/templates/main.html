@@ -3,11 +3,14 @@
 <html>
 <head>
     <title>Farmacompare</title>
-    <link href="{% static 'css/products.css' %}" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="{% static 'css/products.css' %}" rel="stylesheet">
 </head>
 <body>
     <header class="header">
@@ -15,85 +18,90 @@
             <a href="{% url 'core:index' %}">
                 <img src="{% static 'img/logo.png' %}" alt="Logo" class="logo">
             </a>
-            <div class="nav-links">
-                <a href="#plans">Serviços</a>
-                <a href="#services">Sobre</a>
-                <a href="#testimonials">Depoimentos</a>
-                <ul class="navbar-nav">
-                    {% if user.is_authenticated %}
-                    <li class="nav-item dropdown">
-                        <button class="btn-nav" id="user-menu-button">
-                            <a href="#" class="nav-link" aria-label="Perfil de {{ user.username }}">
-                                <i class="bi bi-person-circle"></i> {{ user.username }}
-                            </a>
-                        </button>
-                        <div class="sidebar-menu" id="sidebar-menu">
-                            <ul>
-                                <li><a href="{% url 'core:auth' %}"><i class="bi bi-person-circle"></i> Ver Minha Conta</a></li>
-                                <li><a href="{% url 'core:auth' %}"><i class="bi bi-arrow-up-circle"></i> Subir Plano</a></li>
-                                <li><a href="{% url 'core:logout' %}"><i class="bi bi-box-arrow-right"></i> Sair</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a href="{% url 'core:auth' %}" aria-label="Login">
-                                <img src="{% static 'img/users.png' %}" alt="Login" class="login-icon">
-                            </a>
-                        </li>
-                    {% endif %}
-                </ul>
+            <div class="search-bar">
+                <button type="button" id="search-icon" onclick="searchProducts(event)">
+                    <i class="bi bi-search"></i> 
+                </button>
+                <input type="text" id="search-input" placeholder="Buscar e comparar..." oninput="searchProducts(event)">
+                <span class="clear-icon" id="clear-search" onclick="clearSearch()">&times;</span>
             </div>
+    
+            <div id="search-results-container"></div>
+    
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <button class="btn-nav" id="user-menu-button">
+                        <a href="#" class="nav-link" aria-label="Perfil de {{ user.username }}">
+                            <i class="bi bi-person-circle"></i> {{ user.username }}
+                        </a>
+                    </button>
+                    <div class="sidebar-menu" id="sidebar-menu">
+                        <ul>
+                            <li><a href="{% url 'core:main' %}"><i class="bi bi-person-circle"></i> Ver Minha Conta</a></li>
+                            <li><a href="{% url 'core:card' %}"><i class="bi bi-arrow-up-circle"></i> Subir Plano</a></li>
+                            <li><a href="{% url 'core:logout' %}"><i class="bi bi-box-arrow-right"></i> Sair</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
         </nav>
     </header>
+    
     <div class="banner">
         <img src="https://storage.googleapis.com/a1aa/image/9R3PBZonyWbIOBAOlvaPWGMEQKUhZTXGkMOEpe40vuVzuY0JA.jpg"
-             alt="Banner with text '20% OFF FOR FULL BODY CHECK-UP' and a phone number">
+             alt="Banner promocional">
     </div>
-    <div class="content">
-        <h2>Compare os melhores preços e economize</h2>
-        <div class="products">
-            {% for product in products %}
-            <div class="product-card">
-                <img src="{{ product.image_url }}" alt="Product Image">
-                <h3>{{ product.name }}</h3>
-                <p>R$ {{ product.price }}</p>
-            </div>
+    <p>Total de produtos: {{ produtos|length }}</p>
+
+    <div class="product-gallery">
+        <h2>Compare os melhores preços</h2> 
+        <div class="product-container">
+            {% for product in produtos %}
+                <div class="product-card">
+                    <img src="{{ product.images }}" alt="Imagem do Produto">
+                    <p>{{ product.name }}</p>
+                    <p class="price">Preço: R$ {{ product.price }}</p>
+                    <p>Farmácia: {{ product.nome_farmacia }}</p>
+                </div>
             {% endfor %}
         </div>
     </div>
-    <div class="partners">
-        <h2>Farmácias Parceiras</h2>
-        {% for partner in partners %}
-        <img src="{{ partner.logo_url }}" alt="Partner Logo">
-        {% endfor %}
-    </div>
-    <div class="footer">
+    
+    
+    {% if produtos.has_next %}
+        <button id="load-more" data-next-page="{{ produtos.next_page_number }}">Carregar Mais</button>
+    {% endif %}
+    
+    <footer class="footer">
         <div class="contact-info">
             <div>
-                <i class="fas fa-envelope"></i>
-                <p>info@youraddress.com</p>
-                <p>646-675-1974</p>
+                <h3>Contatos</h3>
+                <p>info@seusite.com</p>
+                <p>(11) 1234-5678</p>
             </div>
             <div>
-                <i class="fas fa-map-marker-alt"></i>
-                <p>3041 Smart Street, New York</p>
-                <p>United States</p>
+                <h3>Localização</h3>
+                <p>Rua Pequena, 1301, São Paulo</p>
+                <p>Brasil</p>
             </div>
             <div>
-                <i class="fas fa-clock"></i>
-                <p>Open: 12:00 pm</p>
-                <p>Closed: 22:00 pm</p>
+                <h3>Horário de funcionamento</h3>
+                <p>Abertura: 12:00</p>
+                <p>Fechamento: 23:00</p>
             </div>
         </div>
         <div class="subscribe">
-            <input type="email" placeholder="Enter your email">
-            <button>Subscribe</button>
+            <input type="email" placeholder="Digite seu email">
+            <button>Inscrever-se</button>
         </div>
-        <p>© All rights reserved. FarmaCompare</p>
-    </div>
+        <p>© Todos os direitos reservados, FarmaCompare</p>
+    </footer>
     <script src="{% static 'js/header.js' %}"></script>
     <script src="{% static 'js/menu.js' %}"></script>
     <script src="{% static 'js/dropdown.js' %}"></script>
+    <script src="{% static 'js/product-slider.js' %}"></script>
+    <script src="{% static 'js/searchh.js' %}"></script>
 </body>
 </html>
+    
+
