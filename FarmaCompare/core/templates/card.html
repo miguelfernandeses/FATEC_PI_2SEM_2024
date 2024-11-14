@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/card.css' %}">
+    <title>Formulário de Cartão</title>
+</head>
+<body>
+    <div class="container">
+        <div class="card-wrapper-container">
+            <form class="card-form" method="POST" action="{% url 'core:main' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                
+                    <label for="number">Número do Cartão</label>
+                    <input type="text" name="number" id="number" placeholder="Número do Cartão" required>
+                </div>
+                
+                <div class="form-group-inline">
+                    <div class="form-group">
+                        <label for="expiry">Data de Validade</label>
+                        <input type="text" name="expiry" id="expiry" placeholder="MM/AAAA" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cvc">CVV</label>
+                        <input type="text" name="cvc" id="cvc" placeholder="CVV" required>
+                    </div>
+                </div>
+            
+                <div class="form-group">
+                    <label for="name">Nome no Cartão</label>
+                    <input type="text" name="name" id="name" placeholder="Nome Completo" required>
+                </div>
+                <button type="submit" class="btn-finalizar">Finalizar</button>
+                <h3>Plano Selecionado: {{ plano_nome }}</h3>
+                <p>Preço: {{ plano_preco }}</p>
+                <ul>
+                    {% for detalhe in plano_detalhes %}
+                        <li>{{ detalhe }}</li>
+                    {% endfor %}
+                </ul>
+            </form>
+            
+            <div class="card-wrapper"></div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/card.js' %}"></script>
+    <script>
+        var card = new Card({
+            form: 'form',
+            container: '.card-wrapper',
+            placeholders: {
+                number: '   ',
+                name: 'Nome',
+                expiry: '/**',
+                cvc: '***'
+            }
+        });
+        
+    </script>
+</body>
+</html>
