@@ -4,9 +4,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import CadastroForm, LoginForm
 import logging
-from .models import Produto, CadastroModel
+from .models import Produto
 from django.core.paginator import Paginator
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, render
+from django.db.models import F
+from django.contrib.postgres.search import TrigramSimilarity
 
 
 logger = logging.getLogger(__name__)
@@ -16,8 +19,10 @@ def index(request):
 
 def auth_view(request):
     form_cadastro = CadastroForm()
-    
+    form_login = LoginForm()
+
     if request.method == "POST":
+        # Cadastro
         if 'razao_social' in request.POST:
             form_cadastro = CadastroForm(request.POST)
             if form_cadastro.is_valid():
@@ -27,6 +32,8 @@ def auth_view(request):
             else:
                 form_cadastro.errors['email'] = form_cadastro.errors.get('email', [])
                 form_cadastro.errors['cnpj'] = form_cadastro.errors.get('cnpj', [])
+
+        # Login
         elif 'email' in request.POST:
             form_login = LoginForm(request.POST)
             if form_login.is_valid():
@@ -38,9 +45,9 @@ def auth_view(request):
                     messages.success(request, "Login bem-sucedido.")
                     return redirect('core:index')
                 else:
-                    messages.error(request, "Credenciais inválidas.")
+                    messages.error(request, "Credenciais inválidas. Tente novamente.")
 
-    return render(request, "auth.html", {"form_cadastro": form_cadastro})
+    return render(request, "auth.html", {"form_cadastro": form_cadastro, "form_login": form_login})
 
 
 def logout_view(request):
@@ -97,21 +104,59 @@ def lista_produtos(request):
     produtos = Produto.objects.all()[:20]
     return render(request, 'main.html', {'produtos': produtos})
 
+
 def search(request):
     query = request.GET.get('q', '')
     page = int(request.GET.get('page', 1))
-    limit = int(request.GET.get('limit', 20))  
+    limit = int(request.GET.get('limit', 20))
     
     if query:
         produtos = Produto.objects.filter(name__icontains=query)
-        
-        start = (page - 1) * limit
-        end = start + limit
-        produtos_pagina = produtos[start:end]
-        
+
+        paginator = Paginator(produtos, limit)
+        produtos_pagina = paginator.get_page(page)
+
         data = {
-            'products': list(produtos_pagina.values('name', 'price', 'nome_farmacia'))
+            'products': list(produtos_pagina.object_list.values('name', 'nome_farmacia', 'images')),
         }
         return JsonResponse(data)
     
     return JsonResponse({'products': []})
+
+
+def produto_detalhes(request, name):
+    produto = get_object_or_404(Produto, name=name)
+    return render(request, 'produto_detalhes.html', {'produto': produto})
+
+def produto_detalhe(request, produto_id):
+    produto = Produto.objects.get(id=produto_id)
+
+    outras_farmacias = Produto.objects.annotate(
+        similarity=TrigramSimilarity('name', produto.name)
+    ).filter(
+        similarity__gt=0.3
+    ).filter(
+        Q(ean=produto.ean) | Q(similarity__gt=0.3) 
+    ).exclude(
+        id=produto.id
+    ).order_by('-similarity')[:5]
+
+    return render(request, 'produto_detalhes.html', {
+        'produto': produto,
+        'outras_farmacias': outras_farmacias
+    })
+
+def busca_produtos(request):
+    query = request.GET.get('q', '')
+    
+    if query:
+        produtos = Produto.objects.annotate(
+            similarity=TrigramSimilarity('name', query)
+        ).filter(similarity__gt=0.3).order_by('-similarity')
+    else:
+        produtos = Produto.objects.all()
+    
+    return render(request, 'produtos_busca.html', {
+        'produtos': produtos,
+        'query': query
+    })

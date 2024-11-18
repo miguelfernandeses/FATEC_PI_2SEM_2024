@@ -32,6 +32,7 @@ function searchProducts(event) {
                         resultItem.classList.add('search-result');
                         resultItem.innerHTML = `
                             <div class="product-info">
+                            <a href="/produto/${encodeURIComponent(product.name)}/"> 
                                 <img src="${product.image}"> 
                                 <p><strong>${product.name}</strong></p>
                             </div>
@@ -58,3 +59,16 @@ function clearSearch() {
     searchInput.focus(); 
     document.getElementById('search-results-container').style.display = 'none'; 
 }
+
+
+document.getElementById('search-input').addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        
+        const query = document.getElementById('search-input').value.trim();
+        
+        if (query.length > 0) {
+            window.location.href = `/busca/?q=${encodeURIComponent(query)}`;
+        }
+    }
+});

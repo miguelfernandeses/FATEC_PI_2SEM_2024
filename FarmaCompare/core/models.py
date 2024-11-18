@@ -35,6 +35,7 @@ class Plano(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.get_plano_display()}"
     
+    
 class Produto(models.Model):
     nome_farmacia = models.CharField(max_length=255)
     product_url = models.URLField(max_length=1024)
