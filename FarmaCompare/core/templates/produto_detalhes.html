@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ produto.name }}</title>
+    <link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
+</head>
+<body>
+    <div class="product-container">
+        <div class="product-header">
+            <h1 class="product-title">{{ produto.name }}</h1>
+            <p class="farmacia-name">{{ produto.nome_farmacia }}</p>
+        </div>
+        
+        <div class="product-details">
+            <div class="product-image">
+                <img src="{{ produto.image }}" alt="{{ produto.name }}">
+            </div>
+            <div class="product-info">
+                <p class="price">R$ {{ produto.price }}</p>
+                <p><strong>Descrição:</strong> {{ produto.description }}</p>
+                <p><strong>Substância:</strong> {{ produto.substance }}</p>
+            </div>
+        </div>
+
+        <div class="product-footer">
+            <button class="buy-now-button">Comprar Agora</button>
+        </div>
+        
+        <!-- Seção de Outras Farmácias -->
+        <div class="other-pharmacies">
+            <h2>Outras Farmácias com o Mesmo Produto</h2>
+            <div class="other-pharmacies-list">
+                {% for farmacia in outras_farmacias %}
+                    <div class="other-pharmacy">
+                        <h3>{{ farmacia.nome_farmacia }}</h3>
+                        <p><strong>Preço:</strong> R$ {{ farmacia.price }}</p>
+                        <a href="/produto/{{ farmacia.id }}/" class="view-product-link">Ver Produto</a>
+                    </div>
+                {% empty %}
+                    <p>Nenhuma outra farmácia encontrada.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

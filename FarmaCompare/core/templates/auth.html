@@ -103,10 +103,21 @@
                         </a>
                     </ul>
                 </div>
+
                 <p class="description description-second">ou use sua conta de e-mail:</p>
                 <form method="POST" action="{% url 'core:auth' %}">
                     {% csrf_token %}
-                    
+                
+                    <!-- Caixa de erro geral para login incorreto -->
+                    {% if messages %}
+                        <div class="error-messages">
+                            {% for message in messages %}
+                                <p>{{ message }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                
+                    <!-- Campo de E-mail -->
                     <label class="label-input" for="email">
                         <i class="far fa-envelope icon-modify"></i>
                         <input type="email" name="email" placeholder="E-mail" required>
@@ -114,6 +125,8 @@
                             <div class="error">{{ form_login.email.errors.0 }}</div>
                         {% endif %}
                     </label>
+                
+                    <!-- Campo de Senha -->
                     <label class="label-input" for="password">
                         <i class="fas fa-lock icon-modify"></i>
                         <div class="password-container">
@@ -124,7 +137,11 @@
                             <i class="fas fa-eye" id="eye-icon"></i>
                         </div>
                     </label>
+                
+                    <!-- Link para recuperação de senha -->
                     <a class="password" href="#">Esqueceu sua senha?</a>
+                
+                    <!-- Botão de Login -->
                     <button class="btn btn-second">Entrar</button>
                 </form>
             </div>

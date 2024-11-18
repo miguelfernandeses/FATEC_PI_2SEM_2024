@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados de Pesquisa - {{ query }}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <h1>Resultados para "{{ query }}"</h1>
+    
+    {% if produtos %}
+        <div class="produtos-lista">
+            {% for produto in produtos %}
+                <div class="produto">
+                    <a href="{% url 'produto_detalhe' produto.id %}">
+                        <img src="{{ produto.images }}" alt="{{ produto.name }}">
+                        <p><strong>{{ produto.name }}</strong></p>
+                        <p>Preço: R$ {{ produto.price }}</p>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Nenhum produto encontrado para "{{ query }}".</p>
+    {% endif %}
+</body>
+</html>
