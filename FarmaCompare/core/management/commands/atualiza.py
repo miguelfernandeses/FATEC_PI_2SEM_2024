@@ -1,3 +1,4 @@
+
 import csv
 from decimal import Decimal, InvalidOperation
 from django.core.exceptions import ValidationError
@@ -9,9 +10,13 @@ class Command(BaseCommand):
     help = "Atualiza o banco de dados com os dados dos CSVs"
 
     def handle(self, *args, **kwargs):
-        data_folder = r'C:\Users\piiet\OneDrive\Documentos\Faculdade\PI\FarmaCompare\core\data'
-        csv_files = ['produtos.csv', 'produtos_lecer.csv']
-
+        data_folder = r'C:\Users\piiet\OneDrive\Documentos\GitHub\FATEC_PI_2SEM_2024\FarmaCompare\core\data'
+        csv_files = [
+            'farma_ultrafarma.csv', 
+            'drogariasaopaulo.csv', 
+            'paguemenos.csv', 
+            'precopopular.csv'
+        ]
         for csv_file in csv_files:
             with open(os.path.join(data_folder, csv_file), newline='', encoding='utf-8') as f:
                 reader = csv.DictReader(f)
@@ -29,7 +34,7 @@ class Command(BaseCommand):
                         price_old = Decimal(price_old_raw)
                     except (ValueError, InvalidOperation):
                         price_old = None
-
+                    print(row.keys())
                     produto, created = Produto.objects.update_or_create(
                         ean=row['ean'],
                         nome_farmacia=row['nome_farmacia'],
@@ -41,7 +46,6 @@ class Command(BaseCommand):
                             'price_old': price_old,
                             'description': row.get('description', str()),
                             'substance': row.get('substance', str()),
-                            'factory': row.get('factory', str()),
                             'brand': row.get('brand', str()),
                             'category': row.get('category', str()),
                             'images': row.get('images', str()),
