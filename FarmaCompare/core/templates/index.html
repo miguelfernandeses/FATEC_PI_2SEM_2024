@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link href="{% static 'css/main.css' %}" rel="stylesheet"> 
+    <link href="{% static 'css/index.css' %}" rel="stylesheet"> 
 </head>
 <body>  
     <header class="header">
@@ -55,7 +55,9 @@
         <h1>FarmaCompare</h1>
         <p>Bem-vindo ao FarmaCompare. Nossa plataforma inovadora simplifica o processo de comparação de preços de medicamentos em diversas farmácias online,
         facilitando para você encontrar as melhores ofertas disponíveis.</p>
-        <button>Comparar preços</button>
+        <a href="{% url 'core:main' %}">
+            <button>Comparar preços</button>
+        </a>
     </section>
 
     <section class="about">
@@ -67,18 +69,18 @@
         <div>
             <h3>Comparação de preços</h3>
             <p>Aproveitando nosso banco de dados extenso e insights de mercado, realizamos comparações detalhadas de preços adaptadas às suas necessidades, garantindo que você sempre encontre os melhores preços para seus medicamentos.</p>
-            
         </div>
+
         <div>
             <h3>Consultoria especializada</h3>
             <p>Nossa equipe qualificada oferece recomendações e insights para ajudar farmácias a ajustarem seus preços de forma eficaz, garantindo que permaneçam competitivas em um mercado em rápida evolução.</p>
-            
         </div>
+
         <div>
             <h3>Análise de mercado</h3>
             <p>No FarmaCompare, oferecemos serviços completos de análise de mercado, fornecendo avaliações precisas que atendem às suas necessidades comerciais. Conte conosco para otimizar suas estratégias de preços e melhorar sua competitividade.</p>
-            
         </div>
+
     </section>
 
     <section id="testimonials" class="testimonials">
@@ -102,9 +104,10 @@
         <div class="plan">
             <h3 class="plan-title">Grátis</h3>
             <p class="plan-price">R$ 0,00 / Mês</p>
-            <form action="{% url 'core:escolher_plano' %}" method="POST">
+            <form action="{% url 'core:card' %}" method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="plano_id" value="1">
+                <input type="hidden" name="email" value="{{ user.email }}">
                 <button type="submit">Adquirir Plano</button>
             </form>
             <ul class="divider"></ul>
@@ -116,9 +119,10 @@
         <div class="plan">
             <h3 class="plan-title">Mensal</h3>
             <p class="plan-price">R$ 49,90 / Mês</p>
-            <form action="{% url 'core:escolher_plano' %}" method="POST">
+            <form action="{% url 'core:card' %}" method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="plano_id" value="2">
+                <input type="hidden" name="email" value="{{ user.email }}">
                 <button type="submit">Adquirir Plano</button>
             </form>
             <ul class="divider"></ul>
@@ -134,9 +138,10 @@
             <h3 class="plan-title">Anual</h3>
             <p class="plan-price">R$ 42,90 / Mês</p>
             <p class="economize">Economize R$ 80,00</p>
-            <form action="{% url 'core:escolher_plano' %}" method="POST">
+            <form action="{% url 'core:card' %}" method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="plano_id" value="3">
+                <input type="hidden" name="email" value="{{ user.email }}">
                 <button type="submit" class="plan-button">Adquirir Plano</button>
             </form>
             <ul class="divider"></ul>
@@ -150,9 +155,6 @@
         </div>
     </section>
     
-    
-    
-
     <footer class="footer">
         <div class="contact-info">
             <div>
@@ -177,6 +179,7 @@
         </div>
         <p>© Todos os direitos reservados, FarmaCompare</p>
     </footer>
+
     <script src="{% static 'js/header.js' %}"></script>
     <script src="{% static 'js/menu.js' %}"></script>
     <script src="{% static 'js/dropdown.js' %}"></script>
