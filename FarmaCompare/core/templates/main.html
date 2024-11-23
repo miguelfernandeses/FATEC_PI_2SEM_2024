@@ -10,7 +10,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link href="{% static 'css/prod.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
 </head>
 <body>
     <header class="header">
@@ -52,26 +52,54 @@
         <img src="https://storage.googleapis.com/a1aa/image/9R3PBZonyWbIOBAOlvaPWGMEQKUhZTXGkMOEpe40vuVzuY0JA.jpg"
              alt="Banner promocional">
     </div>
-    <p>Total de produtos: {{ produtos|length }}</p>
 
     <div class="product-gallery">
-        <h2>Compare os melhores preços</h2> 
         <div class="product-container">
-            {% for product in produtos %}
-                <div class="product-card">
-                    <img src="{{ product.images }}" alt="Imagem do Produto">
-                    <p>{{ product.name }}</p>
-                    <p class="price">Preço: R$ {{ product.price }}</p>
-                    <p>Farmácia: {{ product.nome_farmacia }}</p>
-                </div>
+            {% for product in produtos_dsp %}
+            <div class="product-card">
+                <img src="{{ product.images }}" alt="{{ product.name }}">
+                <p>{{ product.name }}</p>
+                <p class="price">Preço: R$ {{ product.price }}</p>
+                <p>Farmácia: {{ product.nome_farmacia }}</p>
+            </div>
+            {% empty %}
+            <p>Nenhum produto encontrado para a dsp.</p>
             {% endfor %}
         </div>
     </div>
     
-    
-    {% if produtos.has_next %}
-        <button id="load-more" data-next-page="{{ produtos.next_page_number }}">Carregar Mais</button>
-    {% endif %}
+    <div class="product-gallery">
+        <div class="product-container">
+            {% for product in produtos_paguemenos %}
+                <div class="product-card">
+                    <img src="{{ product.images }}" alt="{{ product.name }}">
+                    <p>{{ product.name }}</p>
+                    <p class="price">Preço: R$ {{ product.price }}</p>
+                    <p>Farmácia: {{ product.nome_farmacia }}</p>
+                </div>
+            {% empty %}
+                <p>Nenhum produto encontrado para a Pague Menos.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="farmacias-parceiras">
+        <h2>Farmácias Parceiras</h2> 
+        <div class="farmacias-container">
+            <div class="farmacia">
+                <img src="{% static 'img/ultrafarma.png' %}">
+            </div>
+            <div class="farmacia">
+                <img src="{% static 'img/precopopular.png' %}">
+            </div>
+            <div class="farmacia">
+                <img src="{% static 'img/paguemenos.png' %}">
+            </div>
+            <div class="farmacia">
+                <img src="{% static 'img/drogal.png' %}">
+            </div>
+        </div>
+    </div>
     
     <footer class="footer">
         <div class="contact-info">
@@ -105,4 +133,6 @@
 </body>
 </html>
     
+
+
 

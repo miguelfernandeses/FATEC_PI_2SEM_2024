@@ -10,10 +10,11 @@
 <body>
     <div class="container">
         <div class="card-wrapper-container">
-            <form class="card-form" method="POST" action="{% url 'core:main' %}">
+            <form class="card-form" action="{% url 'core:selecionar_plano' %}" method="POST">
                 {% csrf_token %}
-                <div class="form-group">
+                <input type="hidden" name="plano_id" value="{{ plano_id }}">
                 
+                <div class="form-group">
                     <label for="number">Número do Cartão</label>
                     <input type="text" name="number" id="number" placeholder="Número do Cartão" required>
                 </div>
@@ -34,14 +35,10 @@
                     <label for="name">Nome no Cartão</label>
                     <input type="text" name="name" id="name" placeholder="Nome Completo" required>
                 </div>
+                
                 <button type="submit" class="btn-finalizar">Finalizar</button>
                 <h3>Plano Selecionado: {{ plano_nome }}</h3>
                 <p>Preço: {{ plano_preco }}</p>
-                <ul>
-                    {% for detalhe in plano_detalhes %}
-                        <li>{{ detalhe }}</li>
-                    {% endfor %}
-                </ul>
             </form>
             
             <div class="card-wrapper"></div>
@@ -60,7 +57,6 @@
                 cvc: '***'
             }
         });
-        
     </script>
 </body>
 </html>

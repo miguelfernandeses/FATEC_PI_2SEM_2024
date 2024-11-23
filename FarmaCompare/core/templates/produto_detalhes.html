@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br"> 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +16,7 @@
         
         <div class="product-details">
             <div class="product-image">
-                <img src="{{ produto.image }}" alt="{{ produto.name }}">
+                <img src="{{ product.images }}">
             </div>
             <div class="product-info">
                 <p class="price">R$ {{ produto.price }}</p>
@@ -24,12 +24,16 @@
                 <p><strong>Substância:</strong> {{ produto.substance }}</p>
             </div>
         </div>
+        
 
         <div class="product-footer">
-            <button class="buy-now-button">Comprar Agora</button>
+            <button class="buy-now-button">Comparar Agora</button>
         </div>
+        <p>Plano: {{ user.cadastro.get_plano_display }}</p>
+{% if user.cadastro.plano == 1 %}
+    <p>Consultas restantes: {{ user.cadastro.consultas_restantes }}</p>
+{% endif %}
         
-        <!-- Seção de Outras Farmácias -->
         <div class="other-pharmacies">
             <h2>Outras Farmácias com o Mesmo Produto</h2>
             <div class="other-pharmacies-list">
