@@ -14,7 +14,11 @@ class Command(BaseCommand):
             'farma_ultrafarma.csv', 
             'drogariasaopaulo.csv', 
             'paguemenos.csv', 
-            'precopopular.csv'
+            'precopopular.csv',
+            'extrafarma.csv',
+            'drogariaspacheco.csv',
+            'drogariacatarinense.csv',
+            
         ]
         for csv_file in csv_files:
             with open(os.path.join(data_folder, csv_file), newline='', encoding='utf-8') as f:
