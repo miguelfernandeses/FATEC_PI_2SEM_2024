@@ -108,7 +108,6 @@
                 <form method="POST" action="{% url 'core:auth' %}">
                     {% csrf_token %}
                 
-                    <!-- Caixa de erro geral para login incorreto -->
                     {% if messages %}
                         <div class="error-messages">
                             {% for message in messages %}

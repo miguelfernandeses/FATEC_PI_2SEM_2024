@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso Restrito</title>
+</head>
+<body>
+    <h1>Acesso Restrito</h1>
+    <p>
+        Seu plano não permite mais consultas. 
+        Para continuar, faça upgrade para um plano mensal ou anual.
+    </p>
+    <a href="{% url 'core:upgrade_plano' %}">Upgrade de Plano</a>
+</body>
+</html>

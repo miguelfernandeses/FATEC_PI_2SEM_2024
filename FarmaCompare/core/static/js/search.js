@@ -33,7 +33,7 @@ function searchProducts(event) {
                         resultItem.innerHTML = `
                             <div class="product-info">
                             <a href="/produto/${encodeURIComponent(product.name)}/"> 
-                                <img src="${product.image}"> 
+                                <img src="${product.images}"> 
                                 <p><strong>${product.name}</strong></p>
                             </div>
                         `;
