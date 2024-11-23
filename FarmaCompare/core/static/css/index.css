@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
+
+h2 {
+  font-family: "Oswald", sans-serif;
+  color: #003366; 
+}
+
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
@@ -233,23 +240,46 @@ body {
     display: block;
     margin-top: 10px;
   }
-  .testimonials {
-    text-align: center;
-    padding: 50px 20px;
+
+.testimonials {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #d1d9f6;
 }
+
 .testimonials h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: 32px;
+    margin-bottom: 40px;
 }
+
 .testimonials .testimonial {
     display: inline-block;
-    width: 300px;
-    border: 1px solid #000000;
+    max-width: 300px; /* Limita a largura máxima */
+    min-height: 300px; /* Define a altura mínima */
+    background: white;
     padding: 20px;
-    margin: 10px;
-    border-radius: 5px;
-    min-height: 300px;
-    vertical-align: top; 
+    margin: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    vertical-align: top;
+}
+
+.testimonials .testimonial:hover {
+    transform: translateY(-10px); /* Efeito de movimento */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Destaque na sombra */
+}
+
+.testimonials .testimonial h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #0056b3; /* Título destacado */
+}
+
+.testimonials .testimonial p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #555; /* Texto suave */
 }
 
 .plans {
@@ -337,40 +367,78 @@ body {
   transform: scale(1.1);
 }
 
-  .footer {
-    background-color: #003366;
-    color: white;
-    padding: 50px 20px;
-    text-align: center;
-  }
-  .footer .contact-info {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-  }
-  .footer .contact-info div {
-    max-width: 300px;
-  }
-  .footer .subscribe {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .footer .subscribe input {
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px 0 0 5px;
-  }
-  .footer .subscribe button {
-    background-color: #0056b3;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 0 5px 5px 0;
-  }
+.footer {
+  background-color: #003366;
+  color: white;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.contact-info div {
+  max-width: 250px;
+}
+
+.contact-info h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #ffffff;  /* Destaque nos títulos */
+}
+
+.contact-info p {
+  margin: 5px 0;
+}
+
+.subscribe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.subscribe input {
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  width: 250px;
+}
+
+.subscribe button {
+  background-color: #eaf0f5; 
+  color: #003366;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 0 5px 5px 0;
+  transition: background-color 0.3s ease;
+}
+
+.subscribe button:hover {
+  background-color: #3d6bdf;
+}
+
+.footer-bottom {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-bottom p {
+  margin: 0;
+}
 
 
   @media (max-width: 768px) {
