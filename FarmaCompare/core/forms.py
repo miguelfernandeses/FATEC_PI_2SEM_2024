@@ -86,7 +86,8 @@ class CadastroForm(forms.ModelForm):
             cnpj=data['cnpj'],
             telefone=data['telefone'],
             endereco=data['endereco'],
-            senha=data['senha'] 
+            senha=data['senha'],
+            plano=0 
     )
 
         login(request, user)
