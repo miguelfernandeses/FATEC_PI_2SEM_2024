@@ -14,13 +14,16 @@ class CadastroModel(models.Model):
             (2, 'Mensal'),
             (3, 'Anual')
         ],
-        default=0  # Valor padrão, caso o campo não seja preenchido
+        default=0
     )
 
     consultas_restantes = models.IntegerField(default=10)
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
     def __str__(self):
-        return self.razao_social
+        return self.razao_social or self.email
     
     
 class Produto(models.Model):

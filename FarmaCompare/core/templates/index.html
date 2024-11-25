@@ -61,7 +61,7 @@
     </section>
 
     <section class="about">
-        <h2>Saiba Mais</h2>
+        <h2>Saiba mais sobre nós</h2>
         <p>No FarmaCompare, nos concentramos em aproximar farmácias e consumidores, oferecendo uma ferramenta abrangente de comparação de preços. Seja você uma farmácia que deseja melhorar suas estratégias de preços ou um consumidor em busca de economias, estamos aqui para ajudar.</p>
     </section>
 
@@ -100,31 +100,47 @@
     </section>
 
     <section id="plans" class="plans">
-        <h2>Conheça Nossos Planos</h2>
-        <div class="plan">
+        <h2>Conheça nossos planos</h2>
+        
+        <!-- Plano Grátis -->
+        <div class="plan {% if plano_atual == 1 %}plan-atual{% endif %}">
             <h3 class="plan-title">Grátis</h3>
             <p class="plan-price">R$ 0,00 / Mês</p>
-            <form action="{% url 'core:card' %}" method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="plano_id" value="1">
-                <input type="hidden" name="email" value="{{ user.email }}">
-                <button type="submit">Adquirir Plano</button>
-            </form>
+            {% if plano_atual != 1 %}
+                {% if plano_atual == 2 or plano_atual == 3 %}
+                <p class="plan-upgrade">Você fez o Upgrade</p>
+                {% else %}
+                <form action="{% url 'core:card' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="plano_id" value="1">
+                    <input type="hidden" name="email" value="{{ user.email }}">
+                    <button type="submit">Adquirir Plano</button>
+                </form>
+                {% endif %}
+            {% else %}
+            <p class="plan-current">Este é seu plano atual</p>
+            {% endif %}
             <ul class="divider"></ul>
             <ul class="plan-details">
                 <li>Limite de 10 pesquisas</li>
                 <li>Comparação de preços de medicamentos entre 3 farmácias.</li>
             </ul>
         </div>
-        <div class="plan">
+    
+        <!-- Plano Mensal -->
+        <div class="plan {% if plano_atual == 2 %}plan-atual{% endif %}">
             <h3 class="plan-title">Mensal</h3>
             <p class="plan-price">R$ 49,90 / Mês</p>
+            {% if plano_atual != 2 %}
             <form action="{% url 'core:card' %}" method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="plano_id" value="2">
                 <input type="hidden" name="email" value="{{ user.email }}">
                 <button type="submit">Adquirir Plano</button>
             </form>
+            {% else %}
+            <p class="plan-current">Este é seu plano atual</p>
+            {% endif %}
             <ul class="divider"></ul>
             <ul class="plan-details">
                 <li>Pesquisas ilimitadas</li>
@@ -134,16 +150,22 @@
                 <li>Atendimento prioritário e suporte dedicado.</li>
             </ul>
         </div>
-        <div class="plan">
+    
+        <!-- Plano Anual -->
+        <div class="plan {% if plano_atual == 3 %}plan-atual{% endif %}">
             <h3 class="plan-title">Anual</h3>
             <p class="plan-price">R$ 42,90 / Mês</p>
             <p class="economize">Economize R$ 80,00</p>
+            {% if plano_atual != 3 %}
             <form action="{% url 'core:card' %}" method="POST">
                 {% csrf_token %}
                 <input type="hidden" name="plano_id" value="3">
                 <input type="hidden" name="email" value="{{ user.email }}">
                 <button type="submit" class="plan-button">Adquirir Plano</button>
             </form>
+            {% else %}
+            <p class="plan-current">Este é seu plano atual</p>
+            {% endif %}
             <ul class="divider"></ul>
             <ul class="plan-details">
                 <li>Pesquisas ilimitadas</li>
@@ -156,27 +178,28 @@
     </section>
     
     <footer class="footer">
-        <div class="footer-content">
-            <div class="contact-info">
-                <div>
-                    <h3>Contatos</h3>
-                    <p>info@seusite.com</p>
-                    <p>(11) 1234-5678</p>
-                </div>
-                <div>
-                    <h3>Localização</h3>
-                    <p>Rua Pequena, 1301, São Paulo</p>
-                    <p>Brasil</p>
-                </div>
+        <div class="contact-info">
+            <div>
+                <h3>Contatos</h3>
+                <p>info@seusite.com</p>
+                <p>(11) 1234-5678</p>
             </div>
-            <div class="subscribe">
-                <input type="email" placeholder="Digite seu email">
-                <button>Inscrever-se</button>
+            <div>
+                <h3>Localização</h3>
+                <p>Rua Pequena, 1301, São Paulo</p>
+                <p>Brasil</p>
+            </div>
+            <div>
+                <h3>Horário de funcionamento</h3>
+                <p>Abertura: 12:00</p>
+                <p>Fechamento: 23:00</p>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>© Todos os direitos reservados, FarmaCompare</p>
+        <div class="subscribe">
+            <input type="email" placeholder="Digite seu email">
+            <button>Inscrever-se</button>
         </div>
+        <p>© Todos os direitos reservados, FarmaCompare</p>
     </footer>
 
     <script src="{% static 'js/header.js' %}"></script>
