@@ -50,8 +50,20 @@
     
     <div class="banner">
         <img src="https://storage.googleapis.com/a1aa/image/9R3PBZonyWbIOBAOlvaPWGMEQKUhZTXGkMOEpe40vuVzuY0JA.jpg"
-            alt="Banner promocional">
+             alt="Banner promocional">
     </div>
+
+    {% if user.is_authenticated %}
+    <div class="consultas-info">
+        <p>Consultas restantes: 
+            {% if consultas_restantes == 999 %}
+                Ilimitado
+            {% else %}
+                {{ consultas_restantes }}
+            {% endif %}
+        </p>
+    </div>
+    {% endif %}
 
     <div class="product-gallery">
         <div class="product-container">
@@ -96,35 +108,47 @@
                 <img src="{% static 'img/paguemenos.png' %}">
             </div>
             <div class="farmacia">
-                <img src="{% static 'img/drogal.png' %}">
+                <img src="{% static 'img/lecer.png' %}">
+            </div>
+            <div class="farmacia">
+                <img src="{% static 'img/dsp.png' %}">
+            </div>
+            <div class="farmacia">
+                <img src="{% static 'img/ctr.png' %}">
+            </div>
+            <div class="farmacia">
+                <img src="{% static 'img/pacheco.png' %}">
+            </div>
+            <div class="farmacia">
+                <img src="{% static 'img/lecer.png' %}">
             </div>
         </div>
     </div>
     
     <footer class="footer">
-        <div class="footer-content">
-            <div class="contact-info">
-                <div>
-                    <h3>Contatos</h3>
-                    <p>info@seusite.com</p>
-                    <p>(11) 1234-5678</p>
-                </div>
-                <div>
-                    <h3>Localização</h3>
-                    <p>Rua Pequena, 1301, São Paulo</p>
-                    <p>Brasil</p>
-                </div>
+        <div class="contact-info">
+            <div>
+                <h3>Contatos</h3>
+                <p>info@seusite.com</p>
+                <p>(11) 1234-5678</p>
             </div>
-            <div class="subscribe">
-                <input type="email" placeholder="Digite seu email">
-                <button>Inscrever-se</button>
+            <div>
+                <h3>Localização</h3>
+                <p>Rua Pequena, 1301, São Paulo</p>
+                <p>Brasil</p>
+            </div>
+            <div>
+                <h3>Horário de funcionamento</h3>
+                <p>Abertura: 12:00</p>
+                <p>Fechamento: 23:00</p>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>© Todos os direitos reservados, FarmaCompare</p>
+        <div class="subscribe">
+            <input type="email" placeholder="Digite seu email">
+            <button>Inscrever-se</button>
         </div>
+        <p>© Todos os direitos reservados, FarmaCompare</p>
     </footer>
-    
     <script src="{% static 'js/header.js' %}"></script>
     <script src="{% static 'js/menu.js' %}"></script>
     <script src="{% static 'js/dropdown.js' %}"></script>

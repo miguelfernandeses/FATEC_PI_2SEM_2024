@@ -1,16 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
-
-h2 {
-  font-family: "Oswald", sans-serif;
-  color: #003366; 
-}
-
-body {
+.plan-current {
+    border: 2px solid #4CAF50; /* Cor para destacar o plano */
+    background-color: #f0f9f0; /* Fundo para indicar que é o plano atual */
+  }
+  
+  .current-plan-button {
+    background-color: #4CAF50;
+    color: white;
+    cursor: not-allowed;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+  }body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
   }
-
-.header {
+  
+  .header {
     background-color: transparent;
     transition: background-color 0.3s ease, position 0.3s ease;
     width: 100%;
@@ -18,40 +23,40 @@ body {
     position: absolute;
     display: flex;
     height: 90px;
-}
-
-.header nav {
+  }
+  
+  .header nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
     height: 100%;
-}
-
-.header .logo {
+  }
+  
+  .header .logo {
     height: 25px;
     margin-right: auto;
-}
-
-.header .nav-links {
+  }
+  
+  .header .nav-links {
     display: flex;
     align-items: center;
     margin-right: 15px;
-}
-
-.navbar-nav {
+  }
+  
+  .navbar-nav {
     display: flex; 
     align-items: center; 
     list-style: none; 
     margin: 0;
     padding: 0; 
-}
-
-.nav-item {
+  }
+  
+  .nav-item {
   position: relative; 
-}
-
-.sidebar-menu {
+  }
+  
+  .sidebar-menu {
   display: none;
   position: absolute; 
   background-color: #003366; 
@@ -62,84 +67,84 @@ body {
   z-index: 1000;
   margin-top: 5px; 
   left: 0;
-}
-
-.sidebar-menu ul {
+  }
+  
+  .sidebar-menu ul {
   list-style-type: none; 
   padding: 0; 
-}
-
-.sidebar-menu a {
+  }
+  
+  .sidebar-menu a {
   color: white; 
   text-decoration: none; 
   padding: 5px 10px;
   display: flex; 
   align-items: center;
-}
-
-.sidebar-menu a i {
+  }
+  
+  .sidebar-menu a i {
   margin-right: 8px;
-}
-
-
-.sidebar-menu a:hover {
+  }
+  
+  
+  .sidebar-menu a:hover {
   background-color: #00509e;
-}
-
-
-.header nav a {
+  }
+  
+  
+  .header nav a {
     color: white;
     margin: 0 25px; 
     text-decoration: none;
     transition: transform 0.3s ease;
-}
-
-.header nav a:hover {
+  }
+  
+  .header nav a:hover {
   transform: scale(1.1);
-}
-
-.header.scrolled {
+  }
+  
+  .header.scrolled {
     background-color: #003366;
     position: fixed;
     top: 0;
     left: 0;
-}
-
-.header.scrolled nav a {
+  }
+  
+  .header.scrolled nav a {
     color: white;
-}
-
-.btn-nav {
+  }
+  
+  .btn-nav {
     background: none;
     border: none;
     padding: 0;
     cursor: pointer;
-}
-
-
-.login-icon {
+  }
+  
+  
+  .login-icon {
     width: 35px;
     height: auto;
     cursor: pointer;
     margin-left: 15px;
     transition: transform 0.3s ease;
-}
-
-.login-icon:hover {
+  }
+  
+  .login-icon:hover {
     transform: scale(1.1);
-}
-
-.nav-item a {
+  }
+  
+  .nav-item a {
     padding: 10px 15px;
     border-radius: 5px; 
-}
-
-.nav-item a:hover {
+  }
+  
+  .nav-item a:hover {
     background-color: rgba(255, 255, 255, 0.1); 
     color: #f1f1f1; 
-}
-
-.hero {
+  }
+  
+  .hero {
     position: relative;
     background-image: url('../img/background.png');
     background-size: cover;
@@ -150,10 +155,10 @@ body {
     max-height: 500px;
     overflow: hidden;
     z-index: 1;
-}
-
-
-.hero::before {
+  }
+  
+  
+  .hero::before {
     content: ""; 
     position: absolute; 
     top: 0;
@@ -162,18 +167,18 @@ body {
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5); 
     z-index: 1; 
-}
-
-.hero h1, .hero p {
+  }
+  
+  .hero h1, .hero p {
     position: relative; 
     z-index: 2; 
-}
-.hero h1 {
+  }
+  .hero h1 {
   font-size: 3rem; 
   margin-left: 50px;
-}
-
-.hero p {
+  }
+  
+  .hero p {
   font-size: 18px;
   margin: 10px 0 30px 50px; 
   position: relative; 
@@ -181,9 +186,9 @@ body {
   max-width: 600px; 
   line-height: 1.5; 
   text-align: left; 
-}
-
-.hero button {
+  }
+  
+  .hero button {
     background-color: #07305f;
     color: white;
     border: none;
@@ -196,13 +201,13 @@ body {
     position: relative; 
     margin-left: 50px;
     transition: transform 0.3s ease;
-}
-
-.hero button:hover {
+  }
+  
+  .hero button:hover {
   background-color: #0056b3; 
   transform: scale(1.1);
-}
-
+  }
+  
   .about {
     text-align: center;
     padding: 50px 20px;
@@ -240,60 +245,37 @@ body {
     display: block;
     margin-top: 10px;
   }
-
-.testimonials {
-  text-align: center;
-  padding: 50px 20px;
-  background-color: #d1d9f6;
-}
-
-.testimonials h2 {
-    font-size: 32px;
-    margin-bottom: 40px;
-}
-
-.testimonials .testimonial {
+  .testimonials {
+    text-align: center;
+    padding: 50px 20px;
+  }
+  .testimonials h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  .testimonials .testimonial {
     display: inline-block;
-    max-width: 300px; /* Limita a largura máxima */
-    min-height: 300px; /* Define a altura mínima */
-    background: white;
+    width: 300px;
+    border: 1px solid #000000;
     padding: 20px;
-    margin: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-    vertical-align: top;
-}
-
-.testimonials .testimonial:hover {
-    transform: translateY(-10px); /* Efeito de movimento */
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Destaque na sombra */
-}
-
-.testimonials .testimonial h3 {
-    font-size: 20px;
-    margin-bottom: 15px;
-    color: #0056b3; /* Título destacado */
-}
-
-.testimonials .testimonial p {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #555; /* Texto suave */
-}
-
-.plans {
+    margin: 10px;
+    border-radius: 5px;
+    min-height: 300px;
+    vertical-align: top; 
+  }
+  
+  .plans {
   text-align: center;
   padding: 50px 20px;
-}
-
-.plans h3 {
+  }
+  
+  .plans h3 {
   font-size: 24px;
   margin-bottom: 20px;
   text-align: left;
-}
-
-.plans .plan {
+  }
+  
+  .plans .plan {
   display: inline-block;
   width: 300px;
   border: 1px solid #000000;
@@ -302,45 +284,46 @@ body {
   border-radius: 10px;
   min-height: 450px; 
   vertical-align: top;
-}
-
-.plans .plan .plan-title { 
+  }
+  
+  .plans .plan .plan-title { 
   font-size: 20px;
   margin-bottom: 10px;
   text-align: left;
-}
-
-.plans .plan .plan-price { 
+  }
+  
+  .plans .plan .plan-price { 
   font-size: 16px; 
   margin-bottom: 5px; 
   text-align: left;
-}
-.divider {
+  }
+  .divider {
   border: none; 
   border-top: 1px solid #ccc; 
   margin: 12px 0; 
-}
-
-.plans .plan .economize { 
+  }
+  
+  .plans .plan .economize { 
   margin-top: 2px;
   font-size: 12px; 
   color: #777;
   text-align: left;
   margin-bottom: 1px;
-}
-
-.plans .plan-details {
+  }
+  
+  .plans .plan-details {
   list-style-type: circle;
   padding-left: 20px;
   margin: 10px 0;
-}
-
-.plans .plan-details li {
+  }
+  
+  .plans .plan-details li {
   text-align: left;
   font-size: 14px; 
   margin-bottom: 10px; 
-}
-.plans .plan button {
+  }
+  
+  .plans .plan button {
   background-color: #07305f;
   color: white;
   border: none;
@@ -350,9 +333,9 @@ body {
   margin-top: 20px;
   border-radius: 5px;
   transition: transform 0.3s ease;
-}
-
-.plans .plan .plan-button { 
+  }
+  
+  .plans .plan .plan-button { 
   margin-top: 2px; 
   background-color: #07305f;
   color: white;
@@ -361,86 +344,90 @@ body {
   font-size: 16px;
   cursor: pointer;
   border-radius: 5px;
-}
-.plans .plan button:hover {
+  }
+  
+  .plans .plan button:hover {
   background-color: #0056b3; 
   transform: scale(1.1);
-}
-
-.footer {
-  background-color: #003366;
-  color: white;
-  padding: 40px 20px;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-}
-
-.footer-content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-}
-
-.contact-info div {
-  max-width: 250px;
-}
-
-.contact-info h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: #ffffff;  /* Destaque nos títulos */
-}
-
-.contact-info p {
-  margin: 5px 0;
-}
-
-.subscribe {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
-.subscribe input {
-  padding: 10px;
-  font-size: 14px;
-  border: none;
-  border-radius: 5px 0 0 5px;
-  width: 250px;
-}
-
-.subscribe button {
-  background-color: #eaf0f5; 
-  color: #003366;
-  border: none;
-  padding: 10px 20px;
-  font-size: 14px;
-  cursor: pointer;
-  border-radius: 0 5px 5px 0;
-  transition: background-color 0.3s ease;
-}
-
-.subscribe button:hover {
-  background-color: #3d6bdf;
-}
-
-.footer-bottom {
-  text-align: center;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.footer-bottom p {
-  margin: 0;
-}
+  }
 
 
+  .plan-current {
+    color: #0056b3; 
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 2px; 
+    margin-bottom: 0px;
+    padding: 8px 16px; 
+    border-radius: 5px; 
+    background-color: #eef5fd; 
+    display: inline-block; 
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); 
+    border: none; 
+  }
+  
+  .plan-current:hover {
+    color: #003366; 
+    background-color: #d9e9fc; 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  
+  .plan-upgrade {
+    color: #d48003; 
+    font-weight: bold; 
+    font-size: 16px; 
+    margin-top: 20px;
+    margin-bottom: 0px;
+    padding: 8px 12px; 
+    border-radius: 5px; 
+    background-color: #fdeccf; 
+    display: inline-block; 
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .plan-upgrade:hover {
+    color: #e65100; 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); 
+  }
+  
+  
+  .footer {
+    background-color: #003366;
+    color: white;
+    padding: 50px 20px;
+    text-align: center;
+  }
+  .footer .contact-info {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  .footer .contact-info div {
+    max-width: 300px;
+  }
+  .footer .subscribe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .footer .subscribe input {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px 0 0 5px;
+  }
+  .footer .subscribe button {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+  }
+  
+  
   @media (max-width: 768px) {
     .menu-toggle {
         display: block; /* Mostra o botão hamburguer em telas pequenas */
