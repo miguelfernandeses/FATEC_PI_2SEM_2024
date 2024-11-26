@@ -39,29 +39,28 @@
     </header>
     <div class="search-results-container">
         <h1>Resultados para "{{ query }}"</h1>
-
-        <div class="products-list">
-            {% if produtos %}
+        <div class="products-list" id="products-container">
                 {% for produto in produtos %}
                     <div class="product-item">
-                        <img src="{{ produto.images }}">
+                        <img src="{{ produto.images }}" alt="{{ produto.name }}">
                         <h2>{{ produto.name }}</h2>
                         <p>Preço: R$ {{ produto.price }}</p>
-                        <a href="/produto/{{ produto.name|urlencode }}/" class="view-product-button">Ver Produto</a>
+                        <a href="/produto/{{ produto.name|urlencode }}/{{ produto.nome_farmacia|urlencode }}/" class="view-product-button">Ver Produto</a>
                     </div>
                 {% endfor %}
-            {% else %}
-                <p>Nenhum produto encontrado para "{{ query }}".</p>
-            {% endif %}
-        </div> 
-
-        <button id="load-more-button" data-offset="50">Ver Mais</button>
+            </div>
+        </div>
+        {% if produtos.has_next %}
+            <button id="load-more" data-page="2">Ver mais</button>
+        {% endif %}
     </div>
+        
+
     <script src="{% static 'js/header.js' %}"></script>
     <script src="{% static 'js/menu.js' %}"></script>
     <script src="{% static 'js/dropdown.js' %}"></script>
     <script src="{% static 'js/product-slider.js' %}"></script>
-    <script src="{% static 'js/load_more_products.js' %}"></script>
+    <script src="{% static 'js/loadmore.js' %}"></script>
 </body>
 </html>
  
