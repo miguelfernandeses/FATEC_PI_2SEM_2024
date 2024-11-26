@@ -32,7 +32,8 @@ function searchProducts(event) {
                         resultItem.classList.add('search-result');
                         resultItem.innerHTML = `
                             <div class="product-info">
-                            <a href="/produto/${encodeURIComponent(product.name)}/">  
+                            <a href="/produto/${encodeURIComponent(product.name)}/${encodeURIComponent(product.nome_farmacia)}/">
+
                                 <img src="${product.images}"> 
                                 <p><strong>${product.name}</strong></p>
                             </div>

@@ -8,9 +8,10 @@ from .models import Produto, CadastroModel
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponse
+
 
 logger = logging.getLogger(__name__)
-
 
 def index(request):
     try:
@@ -113,12 +114,12 @@ def selecionar_plano(request):
 
                 usuario.plano = plano
                 
-                if plano in [0]:
-                    usuario.consultas_restantes = 0 
+                if plano in [1]:
+                    usuario.consultas_restantes = 10 
                 elif plano in [2, 3]:
                     usuario.consultas_restantes = 999  
                 else:
-                    usuario.consultas_restantes = 10 
+                    usuario.consultas_restantes = 0 
 
                 usuario.save()
                 print(f"Plano do usuário atualizado para: {usuario.plano}, Consultas restantes: {usuario.consultas_restantes}")
@@ -162,6 +163,7 @@ def search(request):
     if query:
         produtos = Produto.objects.filter(name__icontains=query)
     
+    
         if produtos.exists():
             paginator = Paginator(produtos, limit)
             produtos_pagina = paginator.get_page(page)
@@ -178,55 +180,74 @@ def search(request):
     return JsonResponse({'products': []})
 
 
-def search_results(request):
-    query = request.GET.get('query', '')  # Termo de busca
-    offset = int(request.GET.get('offset', 0))  # Offset inicial (padrão 0)
-    limit = 50  # Limite de produtos por página
-    
-    # Filtra os produtos baseados na busca
-    produtos = Produto.objects.filter(name__icontains=query)[offset:offset + limit]
-    
-    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':  
-        # Retorna os dados em formato JSON
+@login_required
+def produto_detalhes(request, name, nome_farmacia):
+    produtos = Produto.objects.filter(name=name, nome_farmacia=nome_farmacia)
+    if produtos.count() == 1:
+        produto = produtos.first()
+        mensagem = None
+    elif produtos.count() > 1:
+        produto = produtos.first()
+        mensagem = "Existem múltiplos produtos com esse nome. Exibindo o primeiro."
+    else:
+        return HttpResponse("Produto não encontrado.", status=404)
+
+    outras_farmacias = Produto.objects.filter(ean=produto.ean).exclude(id=produto.id)[:5]
+
+    return render(request, 'produto_detalhes.html', {
+        'produto': produto,
+        'outras_farmacias': outras_farmacias,
+        'mensagem': mensagem
+    })
+
+
+@login_required
+def produtos_detalhe(request, ean, nome_farmacia):
+    try:
+        produto = Produto.objects.get(ean=ean, nome_farmacia=nome_farmacia)
+    except Produto.DoesNotExist:
+        return HttpResponse("Produto não encontrado.", status=404)
+
+    outras_farmacias = Produto.objects.filter(ean=produto.ean).exclude(nome_farmacia=nome_farmacia)
+
+    return render(request, 'produto_detalhes.html', {
+        'produto': produto,
+        'outras_farmacias': outras_farmacias,
+    })
+
+
+@login_required
+def busca(request):
+    query = request.GET.get('q', '').strip()
+    page = int(request.GET.get('page', 1)) 
+
+    produtos = Produto.objects.all()
+
+    if query:
+        produtos = produtos.filter(name__icontains=query) 
+
+    produtos_validos = []
+    for produto in produtos:
+        try:
+            produto_url = f"/produto/{produto.name}/{produto.nome_farmacia}/"
+            produtos_validos.append(produto)
+        except Exception as e:
+            continue
+
+    paginator = Paginator(produtos_validos, 50) 
+    produtos_page = paginator.get_page(page)
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':  
         produtos_data = [
             {
                 'id': produto.id,
                 'name': produto.name,
                 'price': produto.price,
                 'images': produto.images,
+                'produto_url': f"/produto/{produto.name}/{produto.nome_farmacia}/"
             }
-            for produto in produtos
+            for produto in produtos_page
         ]
-        return JsonResponse({'produtos': produtos_data})
-    
-    # Renderiza o template inicial
-    return render(request, 'search_results.html', {'produtos': produtos, 'query': query})
+        return JsonResponse({'produtos': produtos_data, 'has_next': produtos_page.has_next()})
 
-
-def produto_detalhes(request, name):
-    produto = get_object_or_404(Produto, name=name)
-    return render(request, 'produto_detalhes.html', {'produto': produto})
-
-
-@login_required
-def produto_detalhe(request, produto_id):
-    produto = get_object_or_404(Produto, id=produto_id)
-
-    outras_farmacias = Produto.objects.filter(
-        name__icontains=produto.name
-    ).exclude(id=produto.id)[:5] 
-
-    return render(request, 'produto_detalhes.html', {
-        'produto': produto,
-        'outras_farmacias': outras_farmacias
-    })
-
-def busca(request):
-    query = request.GET.get('q', '').strip()
-    produtos = Produto.objects.all()
-
-    if query:
-        produtos = produtos.filter(name__icontains=query) 
-
-    return render(request, 'busca_resultados.html', {'produtos': produtos, 'query': query})
-
+    return render(request, 'busca_resultados.html', {'produtos': produtos_page, 'query': query})

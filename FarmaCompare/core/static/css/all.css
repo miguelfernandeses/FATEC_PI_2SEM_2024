@@ -1,222 +1,175 @@
-/* Geral */
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    background-color: #f9f9f9;
     font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
     color: #333;
-    margin: 0;
-    padding: 0;
 }
 
-
-.header {
-    background-color: #003366;
-    width: 100%;
-    position: relative;
-    height: 90px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 15px;
-    z-index: 1000;
-    
-}
-
-.header nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
-}
-
-.header nav a:hover {
-    transform: scale(1.1);
-  }
-
-.header .logo {
-    height: 25px;
-    margin-right: auto;
-}
-
-.header .nav-links {
-    display: flex;
-    align-items: center;
-    margin-right: 15px;
-}
-
-.navbar-nav {
-    display: flex; 
-    align-items: center; 
-    list-style: none; 
-    margin: 0;
-    padding: 0; 
-}
-
-.nav-item {
-  position: relative; 
-}
-
-.sidebar-menu {
-    display: none;
-    position: absolute;
-    background-color: #003366;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    margin-top: 5px;
-    left: 0;
-}
-
-.sidebar-menu ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.sidebar-menu a {
-    color: white;
-    text-decoration: none;
-    padding: 5px 10px;
-    display: flex;
-    align-items: center;
-}
-
-.sidebar-menu a i {
-    margin-right: 8px;
-  }
-
-.sidebar-menu a:hover {
-    background-color: #00509e;
-}
-
-.header nav a {
-    color: white;
-    margin: 0 25px;
-    text-decoration: none;
-    transition: transform 0.3s ease;
-}
-
-.header.scrolled nav a {
-    color: white;
-}
-
-.login-icon {
-    width: 35px;
-    height: auto;
-    cursor: pointer;
-    margin-left: 15px;
-    transition: transform 0.3s ease;
-}
-
-.login-icon:hover {
-    transform: scale(1.1);
-}
-
-.nav-item a {
-    padding: 10px 15px;
-    border-radius: 5px; 
-}
-
-.nav-item a:hover {
-    background-color: rgba(255, 255, 255, 0.1); 
-    color: #f1f1f1; 
-}
-
-.search-results-container {
+/* Container do produto */
+.product-container {
     max-width: 1200px;
     margin: 20px auto;
-    padding: 20px;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    overflow: hidden;
 }
 
-.search-results-container h1 {
-    font-size: 2rem;
-    color: #333;
+/* Cabeçalho do produto */
+.product-header {
     text-align: center;
     margin-bottom: 20px;
 }
 
-.products-list {
+.product-title {
+    font-size: 2.5rem;
+    color: #07305f; /* Azul forte */
+}
+
+.farmacia-name {
+    font-size: 1.2rem;
+    color: #777;
+    margin-top: 5px;
+}
+
+/* Detalhes do produto */
+.product-details {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
-    gap: 15px; 
+    gap: 20px;
+    margin-top: 20px;
 }
 
-/* Card de produto */
-.product-item {
-    background-color: #f8f9fa;
-    padding: 15px; 
+.product-image img {
+    max-width: 800px;
+    max-height: 500px;
     border-radius: 8px;
-    width: 200px; 
-    height: 300px;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.product-item:hover {
-    transform: translateY(-8px); 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
+.product-info {
+    max-width: 600px;
 }
 
-.product-item h2 {
-    font-size: 1rem; 
-    color: #333;
-    margin-bottom: 8px;
+.product-info p {
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+.price {
+    font-size: 1.5rem;
+    color: #35ac1e;
     font-weight: bold;
-}
-
-
-.product-item p {
-    color: #026317;
     margin-bottom: 10px;
-    font-size: 0.85rem;
 }
 
-.view-product-button {
-    display: inline-block;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    font-size: 0.85rem; 
+/* Estilo do botão de compra */
+.product-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.buy-now-button {
+    background-color: #07305f;
+    color: white;
+    padding: 12px 25px;
+    font-size: 1rem;
     font-weight: bold;
-    padding: 8px 16px; 
+    border: none;
     border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.view-product-button:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
+.buy-now-button:hover {
+    background-color: #4f82bd;
 }
 
-.product-item img {
-    width: 100px;
-    height: auto;
+/* Outras Farmácias */
+.other-pharmacies {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.other-pharmacies h2 {
+    font-size: 1.8rem;
+    color: #07305f;
+    margin-bottom: 20px;
+}
+
+/* Lista de farmácias */
+.other-pharmacies-list {
+    display: flex;
+    flex-direction: column; /* Alinha as farmácias em coluna */
+    gap: 20px;
+}
+
+.other-pharmacy {
+    background-color: #e6f7ff; /* Fundo azul claro */
     border-radius: 8px;
-    object-fit: cover;
-    margin-bottom: 10px; 
-    transition: transform 0.3s ease-in-out;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
 }
 
-.product-item img:hover {
-    transform: scale(1.05);
+.other-pharmacy h3 {
+    font-size: 1.5rem;
+    color: #07305f; /* Azul para o nome da farmácia */
+    margin-bottom: 10px;
 }
 
-/* Responsividade para telas médias */
-@media screen and (max-width: 768px) {
-    .product-item {
-        width: 30%; /* Três itens por linha em tablets */
+.other-pharmacy p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.view-product-link {
+    display: inline-block;
+    background-color: #07305f; /* Azul */
+    color: white;
+    padding: 8px 15px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.view-product-link:hover {
+    background-color: #4f82bd;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .product-details {
+        flex-direction: column;
+        align-items: center;
     }
-}
 
-/* Responsividade para telas pequenas */
-@media screen and (max-width: 480px) {
-    .product-item {
-        width: 100%; /* Um item por linha em telas pequenas */
+    .product-info {
+        max-width: 100%;
+    }
+
+    .buy-now-button {
+        width: 100%;
+    }
+
+    .other-pharmacies-list {
+        flex-direction: column;
+    }
+
+    .other-pharmacy {
+        width: 100%;
+        max-width: 100%;
+        padding: 15px;
     }
 }
