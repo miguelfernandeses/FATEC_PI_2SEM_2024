@@ -1,175 +1,231 @@
-/* Reset básico */
-* {
+/* Geral */
+body {
+    background-color: #f9f9f9;
+    font-family: 'Arial', sans-serif;
+    color: #333;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+}
+.header {
+    background-color: #003366;
+    width: 100%;
+    position: relative;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    z-index: 1000;
+    
 }
 
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
+.header nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
 }
 
-/* Container do produto */
-.product-container {
+.header nav a:hover {
+    transform: scale(1.1);
+  }
+
+.header .logo {
+    height: 25px;
+    margin-right: auto;
+}
+
+.header .nav-links {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.navbar-nav {
+    display: flex; 
+    align-items: center; 
+    list-style: none; 
+    margin: 0;
+    padding: 0; 
+}
+
+.nav-item {
+  position: relative; 
+}
+
+.sidebar-menu {
+    display: none;
+    position: absolute;
+    background-color: #003366;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    margin-top: 5px;
+    left: 0;
+}
+
+.sidebar-menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar-menu a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-menu a i {
+    margin-right: 8px;
+  }
+
+.sidebar-menu a:hover {
+    background-color: #00509e;
+}
+
+.header nav a {
+    color: white;
+    margin: 0 25px;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.header.scrolled nav a {
+    color: white;
+}
+
+.login-icon {
+    width: 35px;
+    height: auto;
+    cursor: pointer;
+    margin-left: 15px;
+    transition: transform 0.3s ease;
+}
+
+.login-icon:hover {
+    transform: scale(1.1);
+}
+
+.nav-item a {
+    padding: 10px 15px;
+    border-radius: 5px; 
+}
+
+.nav-item a:hover {
+    background-color: rgba(255, 255, 255, 0.1); 
+    color: #f1f1f1; 
+}
+
+
+.search-results-container {
     max-width: 1200px;
     margin: 20px auto;
+    padding: 20px;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Cabeçalho do produto */
-.product-header {
+.search-results-container h1 {
+    font-size: 2rem;
+    color: #333;
     text-align: center;
     margin-bottom: 20px;
 }
 
-.product-title {
-    font-size: 2.5rem;
-    color: #07305f; /* Azul forte */
-}
-
-.farmacia-name {
-    font-size: 1.2rem;
-    color: #777;
-    margin-top: 5px;
-}
-
-/* Detalhes do produto */
-.product-details {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
+.products-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px; /* Espaçamento uniforme entre os itens */
     margin-top: 20px;
 }
 
-.product-image img {
-    max-width: 800px;
-    max-height: 500px;
+.product-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.product-info {
-    max-width: 600px;
+.product-item img {
+    width: 200px; /* Imagem ocupa toda a largura do card */
+    height: 200px;
+    border-radius: 8px;
 }
 
-.product-info p {
-    font-size: 1rem;
-    margin: 10px 0;
-}
-
-.price {
-    font-size: 1.5rem;
-    color: #35ac1e;
+.product-item h2 {
+    font-size: 1.1rem;
     font-weight: bold;
+    color: #333;
+    margin: 10px 0;
+    text-transform: capitalize;
+}
+
+.product-item p {
+    font-size: 1rem;
+    color: #007BFF;
     margin-bottom: 10px;
 }
 
-/* Estilo do botão de compra */
-.product-footer {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
+.view-product-button {
+    display: inline-block;
+    background-color: #007BFF; /* Azul para destaque */
+    color: #fff; /* Cor do texto */
+    padding: 8px 15px; /* Tamanho confortável */ 
+    border-radius: 5px; /* Bordas arredondadas */
+    text-decoration: none; /* Remove sublinhado */
+    font-size: 0.9rem; /* Tamanho de texto */
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Efeito suave */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* Sombra sutil */
 }
 
-.buy-now-button {
-    background-color: #07305f;
-    color: white;
-    padding: 12px 25px;
-    font-size: 1rem;
-    font-weight: bold;
+.view-product-button:hover {
+    background-color: #0056b3; /* Tom mais escuro no hover */
+    color: #fff; /* Garante que a cor do texto permaneça branca no hover */
+    transform: translateY(-3px); /* Efeito de "subir" */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Intensifica a sombra */
+}
+
+.view-product-button:active {
+    background-color: #004494; /* Tom mais escuro ao clicar */
+    transform: translateY(0); /* Remove o "subir" */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* Restaura sombra original */
+}
+
+.product-item .price {
+    color: #28a745 !important;  /* Adicionando !important para garantir que a cor seja aplicada */
+}
+#load-more {
+    background-color: #0066cc;
+    color: #fff;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 1rem;
+    display: block;
+    margin: 20px auto 0;
     transition: background-color 0.3s ease;
 }
 
-.buy-now-button:hover {
-    background-color: #4f82bd;
+#load-more:hover {
+    background-color: #007BFF;
 }
 
-/* Outras Farmácias */
-.other-pharmacies {
-    margin-top: 40px;
-    text-align: center;
-}
 
-.other-pharmacies h2 {
-    font-size: 1.8rem;
-    color: #07305f;
-    margin-bottom: 20px;
-}
-
-/* Lista de farmácias */
-.other-pharmacies-list {
-    display: flex;
-    flex-direction: column; /* Alinha as farmácias em coluna */
-    gap: 20px;
-}
-
-.other-pharmacy {
-    background-color: #e6f7ff; /* Fundo azul claro */
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.products-list p {
+    font-size: 1.2rem;
+    color: #ff5722;
     text-align: center;
     width: 100%;
-}
-
-.other-pharmacy h3 {
-    font-size: 1.5rem;
-    color: #07305f; /* Azul para o nome da farmácia */
-    margin-bottom: 10px;
-}
-
-.other-pharmacy p {
-    font-size: 1.2rem;
-    color: #555;
-    margin-bottom: 10px;
-}
-
-.view-product-link {
-    display: inline-block;
-    background-color: #07305f; /* Azul */
-    color: white;
-    padding: 8px 15px;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.view-product-link:hover {
-    background-color: #4f82bd;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    .product-details {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .product-info {
-        max-width: 100%;
-    }
-
-    .buy-now-button {
-        width: 100%;
-    }
-
-    .other-pharmacies-list {
-        flex-direction: column;
-    }
-
-    .other-pharmacy {
-        width: 100%;
-        max-width: 100%;
-        padding: 15px;
-    }
+    margin-top: 20px;
 }
