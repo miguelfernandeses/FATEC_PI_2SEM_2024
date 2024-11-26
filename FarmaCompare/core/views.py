@@ -14,6 +14,9 @@ logger = logging.getLogger(__name__)
 def index(request):
     return render(request, "index.html")
 
+def conta(request):
+    return render(request, "conta.html" )
+
 def auth_view(request):
     form_cadastro = CadastroForm()
     
