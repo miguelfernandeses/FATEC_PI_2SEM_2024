@@ -16,4 +16,3 @@ urlpatterns = [
     path('busca/', views.busca, name='busca'), 
 ] 
 
-    

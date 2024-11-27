@@ -25,7 +25,9 @@
                 <p class="price">R$ {{ produto.price }}</p>
                 <p><strong>Marca:</strong> {{ produto.brand }}</p>
                 <p><strong>Descrição:</strong> {{ produto.description }}</p>
+                {% if produto.substance != "" %}
                 <p><strong>Substância:</strong> {{ produto.substance }}</p>
+                {% endif %}
             </div>
         </div>
         

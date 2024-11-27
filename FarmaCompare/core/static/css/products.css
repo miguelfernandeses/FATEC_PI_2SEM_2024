@@ -74,10 +74,17 @@ body {
 
 .price_old {
     text-decoration: line-through;
+<<<<<<< Updated upstream
     color: #777; /* Cor cinza opcional para destacar o preço antigo */
 }
 .price {
     font-weight: bold; /* Destacar o preço atual */
+=======
+    color: #777;
+}
+.price {
+    font-weight: bold; 
+>>>>>>> Stashed changes
     color: #000;
 }
 
