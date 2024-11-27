@@ -242,21 +242,50 @@ body {
     cursor: pointer;
 }
 
-.banner {
+/* Estilo para o carrossel com as classes do Bootstrap */
+.carousel {
     position: relative;
+    width: 100%;
     max-width: 1000px;
-    margin: 50px auto 40px; 
+    margin: 50px auto 40px;
     overflow: hidden;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.banner img {
+/* Ajuste o tamanho do carrossel */
+.carousel-inner {
+    position: relative;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.8);
+    height: auto;  /* Ajuste essa altura conforme necessário */
 }
+
+/* As imagens dentro do carrossel */
+.carousel-item img {
+    width: 100%;
+
+    object-fit: contain; /* Ajusta para que a imagem se ajuste sem ser cortada */
+    filter: brightness(0.8); /* Adiciona um efeito de brilho */
+}
+
+/* Botões de controle do carrossel */
+.carousel-control-prev, 
+.carousel-control-next {
+    position: absolute;
+    top: 50%;
+    z-index: 5;
+    transform: translateY(-50%);
+    font-size: 2rem; /* Ajuste o tamanho do ícone se necessário */
+}
+
+.carousel-control-prev {
+    left: 10px;
+}
+
+.carousel-control-next {
+    right: 10px;
+}
+
 
 .content {
     text-align: center;
