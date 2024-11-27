@@ -32,7 +32,7 @@
                     <div class="other-pharmacy">
                         <h3>{{ farmacia.nome_farmacia }}</h3>
                         <p><strong>Preço:</strong> R$ {{ farmacia.price }}</p>
-                        <a href="/produtos/{{ produto.ean }}/{{ farmacia.nome_farmacia|urlencode }}/" class="view-product-link">Ver Produto</a>
+                        <a href="/produtos/{{ produto.ean }}/{{ produto.nome_farmacia|urlencode }}/" class="view-product-link">Ver Produto</a>
                     </div>
                 {% empty %}
                     <p>Nenhuma outra farmácia encontrada.</p>

@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         productItem.innerHTML = `
                         <img src="${product.images}" alt="${product.name}">
                         <h2>${product.name}</h2>
-                        <p>Preço: R$ ${product.price}</p>
+                        <p class="price">Preço: R$ ${product.price}</p>
                         <a href="/produto/${encodeURIComponent(product.name)}/${encodeURIComponent(product.nome_farmacia)}/" class="view-product-button">Ver Produto</a>
                         `;
                         productsContainer.appendChild(productItem);
