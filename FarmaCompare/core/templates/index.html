@@ -62,7 +62,7 @@
     </section>
 
     <section class="about">
-        <h2>Saiba mais sobre nós</h2>
+        <h2>Saiba Mais</h2>
         <p>No FarmaCompare, nos concentramos em aproximar farmácias e consumidores, oferecendo uma ferramenta abrangente de comparação de preços. Seja você uma farmácia que deseja melhorar suas estratégias de preços ou um consumidor em busca de economias, estamos aqui para ajudar.</p>
     </section>
 
@@ -86,22 +86,24 @@
 
     <section id="testimonials" class="testimonials">
         <h2>Depoimentos</h2>
-        <div class="testimonial">
-            <h3>João Campeão</h3>
-            <p>Estou muito satisfeito com o serviço do FarmaCompare. Seus insights me ajudaram a ajustar minha estratégia de preços de forma eficaz. Graças à sua expertise, vi um aumento significativo na competitividade da minha farmácia no mercado.</p>
-        </div>
-        <div class="testimonial">
-            <h3>Clara Marques</h3>
-            <p>O serviço do FarmaCompare foi essencial para ajustar a estratégia de preços da minha farmácia. Suas recomendações e análises precisas trouxeram uma vantagem competitiva notável.</p>
-        </div>
-        <div class="testimonial">
-            <h3>Ana Silva</h3>
-            <p>A qualidade das análises do FarmaCompare superou minhas expectativas. Conseguimos reformular nossa abordagem no mercado, aumentando significativamente nossa margem de lucro e visibilidade.</p>
+        <div class="testimonials-container">
+            <div class="testimonial">
+                <h3>João Campeão</h3>
+                <p>Estou muito satisfeito com o serviço do FarmaCompare. Seus insights me ajudaram a ajustar minha estratégia de preços de forma eficaz. Graças à sua expertise, vi um aumento significativo na competitividade da minha farmácia no mercado.</p>
+            </div>
+            <div class="testimonial">
+                <h3>Clara Marques</h3>
+                <p>O serviço do FarmaCompare foi essencial para ajustar a estratégia de preços da minha farmácia. Suas recomendações e análises precisas trouxeram uma vantagem competitiva notável.</p>
+            </div>
+            <div class="testimonial">
+                <h3>Ana Silva</h3>
+                <p>A qualidade das análises do FarmaCompare superou minhas expectativas. Conseguimos reformular nossa abordagem no mercado, aumentando significativamente nossa margem de lucro e visibilidade.</p>
+            </div>
         </div>
     </section>
 
     <section id="plans" class="plans">
-        <h2>Conheça nossos planos</h2>
+        <h2>Conheça Nossos Planos</h2>
         
         <!-- Plano Grátis -->
         <div class="plan {% if plano_atual == 1 %}plan-atual{% endif %}">
@@ -179,7 +181,8 @@
     </section>
     
     <footer class="footer">
-        <div class="contact-info">
+        <div class="container">
+            <div class="contact-info">
             <div>
                 <h3>Contatos</h3>
                 <p>info@seusite.com</p>
@@ -190,17 +193,13 @@
                 <p>Rua Pequena, 1301, São Paulo</p>
                 <p>Brasil</p>
             </div>
-            <div>
-                <h3>Horário de funcionamento</h3>
-                <p>Abertura: 12:00</p>
-                <p>Fechamento: 23:00</p>
             </div>
-        </div>
-        <div class="subscribe">
+            <div class="subscribe">
             <input type="email" placeholder="Digite seu email">
             <button>Inscrever-se</button>
+            </div>
+            <p>© Todos os direitos reservados, FarmaCompare</p>
         </div>
-        <p>© Todos os direitos reservados, FarmaCompare</p>
     </footer>
 
     <script src="{% static 'js/header.js' %}"></script>
