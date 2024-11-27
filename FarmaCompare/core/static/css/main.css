@@ -244,8 +244,10 @@ body {
 
 .banner {
     position: relative;
-    max-width: 1000px;
-    margin: 50px auto 40px; 
+    width: 80%;
+    max-width: 600px;
+    height: 200px;
+    margin: 120px auto 40px; 
     overflow: hidden;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -256,6 +258,20 @@ body {
     height: 100%;
     object-fit: cover;
     filter: brightness(0.8);
+}
+
+.banner .banner-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 8px 12px;
+    border-radius: 6px;
 }
 
 .content {
@@ -287,27 +303,26 @@ body {
 }
 
 .product-card {
-    width: 200px; 
-    height: 320px; 
+    width: 100px;
+    height: 320px; /* Ajustando altura para acomodar imagem e texto */
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 10px;
-    transition: transform 0.3s ease;
     text-align: center;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    margin: 0 10px;
     display: flex;
-    flex-direction: column; 
-    justify-content: space-between; 
-    margin: 10px;
-    position: relative; 
+    flex-direction: column; /* Organiza a imagem no topo e texto abaixo */
+    justify-content: space-between; /* Garante que o conteúdo seja distribuído adequadamente */
 }
 
 .product-card img {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
-    margin: auto; /* Garante centralização em todos os eixos */
-    display: block; /* Certifica-se de que o elemento seja tratado como bloco */
+    width: 80px; /* Ajuste o tamanho da imagem conforme necessário */
+    height: 80px; /* Tamanho fixo para imagem */
+    object-fit: contain; /* Mantém a imagem proporcional */
+    margin-bottom: 10px; /* Espaçamento entre a imagem e o texto */
 }
 
 .product-card:hover {
@@ -315,40 +330,21 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
-.product-card h2.product-name {
+.product-card p {
     font-size: 14px;
-    font-weight: bold;
     color: #333;
-    margin: 30px 0;
-    text-align: center;
-}
-
-.product-card h3.price {
-    font-size: 14px;
-    color: #1b8835;
-    margin: 10px 0;
-    font-weight: bold;
-    text-align: center;
-}
-
-.product-card span.pharmacy {
-    font-size: 14px;
-    color: #555;
-    margin-top: 10px;
+    margin: 5px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
     display: block;
-    text-align: center;
 }
 
-.product-card .pharmacy-footer {
-    width: 100%;
-    position: absolute; /* Posiciona o rodapé fixo */
-    bottom: 10px; /* Margem inferior do rodapé */
-    left: 0;
-    text-align: center;
+.product-card .price {
+    color: #1b8835;
     font-size: 14px;
-    color: #555;
+    margin-top: 10px;
 }
-
 
 
 .farmacias-parceiras {
