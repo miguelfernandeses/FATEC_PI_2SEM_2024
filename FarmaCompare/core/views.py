@@ -10,6 +10,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 from django.db.models import Q 
+from django.contrib import messages
 
 
 logger = logging.getLogger(__name__)
@@ -32,30 +33,42 @@ def auth_view(request):
 
     if request.method == "POST":
         # Cadastro
-        if 'razao_social' in request.POST:
+        if 'razao_social' in request.POST:  # Indica que o formulário de cadastro foi enviado
             form_cadastro = CadastroForm(request.POST)
             if form_cadastro.is_valid():
                 user = form_cadastro.registrar_empresa(request)
                 login(request, user)
                 return redirect('core:index')
             else:
-                form_cadastro.errors['email'] = form_cadastro.errors.get('email', [])
-                form_cadastro.errors['cnpj'] = form_cadastro.errors.get('cnpj', []) 
+                # Define um contexto específico para os erros de cadastro
+                return render(request, "auth.html", {
+                    "form_cadastro": form_cadastro,
+                    "form_login": LoginForm(),  # Reseta o formulário de login
+                })
 
         # Login
-        elif 'email' in request.POST:
+        elif 'email' in request.POST:  # Indica que o formulário de login foi enviado
             form_login = LoginForm(request.POST)
             if form_login.is_valid():
                 email = form_login.cleaned_data.get("email")
                 password = form_login.cleaned_data.get("password")
-                user = authenticate(username=email, password=password)
+                user = authenticate(request, username=email, password=password)
                 if user is not None:
                     login(request, user)
                     return redirect('core:index')
                 else:
                     messages.error(request, "Credenciais inválidas. Tente novamente.")
+            # Define um contexto específico para os erros de login
+            return render(request, "auth.html", {
+                "form_cadastro": CadastroForm(),  # Reseta o formulário de cadastro
+                "form_login": form_login,
+            })
 
-    return render(request, "auth.html", {"form_cadastro": form_cadastro, "form_login": form_login})
+    # Carregar a página com os dois formulários sem erros por padrão
+    return render(request, "auth.html", {
+        "form_cadastro": form_cadastro,
+        "form_login": form_login,
+    })
 
 #logout
 def logout_view(request):

@@ -24,55 +24,61 @@
                 <p class="description description-second">Preencha com os dados da sua empresa:</p>
                 <form method="POST" action="{% url 'core:auth' %}">
                     {% csrf_token %}
-                    
+                
+                    <!-- Campo de Email -->
                     <label class="label-input" for="empresa_email">
                         <i class="far fa-envelope icon-modify"></i>
-                        <input type="email" id="empresa_email" name="email" placeholder="Email" required>
+                        <input type="email" id="empresa_email" name="email" placeholder="Email" value="{{ form_cadastro.email.value|default:'' }}">
                     </label>
-                    {% if form_cadastro.email.errors %}
-                        <div class="error-message">{{ form_cadastro.email.errors.0 }}</div>
-                    {% endif %}
-                    
+                    {% for error in form_cadastro.email.errors %}
+                        <div class="error-message">{{ error }}</div>
+                    {% endfor %}
+                
+                    <!-- Campo de Razão Social -->
                     <label class="label-input" for="empresa_razao_social">
                         <i class="fas fa-id-badge icon-modify"></i>
-                        <input type="text" id="empresa_razao_social" name="razao_social" placeholder="Razão Social" required>
+                        <input type="text" id="empresa_razao_social" name="razao_social" placeholder="Razão Social" value="{{ form_cadastro.razao_social.value|default:'' }}">
                     </label>
-                    {% if form_cadastro.razao_social.errors %}
-                        <div class="error-message">{{ form_cadastro.razao_social.errors.0 }}</div>
-                    {% endif %}
+                    {% for error in form_cadastro.razao_social.errors %}
+                        <div class="error-message">{{ error }}</div>
+                    {% endfor %}
                 
+                    <!-- Campo de CNPJ -->
                     <label class="label-input" for="empresa_cnpj">
-                        <i class="fas fa-id-card icon-modify"></i>
-                        <input type="text" id="empresa_cnpj" name="cnpj" placeholder="CNPJ" required>
+                        <i class="far fa-id-card icon-modify"></i>
+                        <input type="text" id="empresa_cnpj" name="cnpj" placeholder="CNPJ" value="{{ form_cadastro.cnpj.value|default:'' }}">
                     </label>
-                        {% if form_cadastro.cnpj.errors %}
-                            <div class="error-message">{{ form_cadastro.cnpj.errors.0 }}</div>
-                        {% endif %}
-                        
-                    <label class="label-input" for="empresa_telefone">
+                    {% for error in form_cadastro.cnpj.errors %}
+                        <div class="error-message">{{ error }}</div>
+                    {% endfor %}
+                
+                    <!-- Outros campos -->
+                    <label class="label-input" for="telefone">
                         <i class="fas fa-phone icon-modify"></i>
-                        <input type="tel" id="empresa_telefone" name="telefone" placeholder="Telefone" required>
+                        <input type="text" id="telefone" name="telefone" placeholder="Telefone" value="{{ form_cadastro.telefone.value|default:'' }}">
                     </label>
+                    {% for error in form_cadastro.telefone.errors %}
+                        <div class="error-message">{{ error }}</div>
+                    {% endfor %}
                 
-                    <label class="label-input" for="empresa_endereco">
+                    <label class="label-input" for="endereco">
                         <i class="fas fa-map-marker-alt icon-modify"></i>
-                        <input type="text" id="empresa_endereco" name="endereco" placeholder="Endereço" required>
+                        <input type="text" id="endereco" name="endereco" placeholder="Endereço" value="{{ form_cadastro.endereco.value|default:'' }}">
                     </label>
+                    {% for error in form_cadastro.endereco.errors %}
+                        <div class="error-message">{{ error }}</div>
+                    {% endfor %}
                 
-                    <label class="label-input" for="empresa_senha">
+                    <label class="label-input" for="senha">
                         <i class="fas fa-lock icon-modify"></i>
-                        <div class="password-container">
-                            <input type="password" id="empresa_senha" name="senha" placeholder="Senha" required>
-                        </div>
-                        {% if form.senha.errors %}
-                            <div class="error">{{ form.senha.errors.0 }}</div>
-                        {% endif %}
+                        <input type="password" id="senha" name="senha" placeholder="Senha">
                     </label>
+                    {% for error in form_cadastro.senha.errors %}
+                        <div class="error-message">{{ error }}</div>
+                    {% endfor %}
                 
                     <button class="btn btn-second">Cadastrar</button>
-                </form>
-                
-                
+                </form>                
             </div>
         </div>
         <div class="content second-content">
@@ -105,41 +111,44 @@
                 </div>
 
                 <p class="description description-second">ou use sua conta de e-mail:</p>
+                {% if messages %}
+                <div class="error-box">
+                    {% for message in messages %}
+                        <div class="error-message">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ message }}
+                            <button class="close-btn" onclick="this.parentElement.style.display='none';">x</button>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            
                 <form method="POST" action="{% url 'core:auth' %}">
                     {% csrf_token %}
-                
-                    <!-- Campo de E-mail -->
+                    <!-- Campo de Email -->
                     <label class="label-input" for="email">
                         <i class="far fa-envelope icon-modify"></i>
-                        <input type="email" name="email" placeholder="E-mail" required>
-                        {% if form_login.email.errors %}
-                            <div class="error">{{ form_login.email.errors.0 }}</div>
-                        {% endif %}
+                        <input type="email" id="email" name="email" placeholder="Email" value="{{ form_login.email.value|default:'' }}">
                     </label>
+                    {% for error in form_login.email.errors %}
+                        <div class="error-message">{{ error }}</div>
+                    {% endfor %}
                 
                     <!-- Campo de Senha -->
-                    <label class="label-input" for="password">
+                    <label class="label-input" for="senha">
                         <i class="fas fa-lock icon-modify"></i>
-                        <div class="password-container">
-                            <input type="password" name="password" id="password" placeholder="Senha" required>
-                            {% if form_login.password.errors %}
-                                <div class="error">{{ form_login.password.errors.0 }}</div>
-                            {% endif %}
-                            <i class="fas fa-eye" id="eye-icon"></i>
-                        </div>
+                        <input type="password" id="senha" name="password" placeholder="Senha">
                     </label>
+                    {% for error in form_login.password.errors %}
+                        <div class="error-message">{{ error }}</div>
+                    {% endfor %}
                 
-                    <!-- Link para recuperação de senha -->
-                    <a class="password" href="#">Esqueceu sua senha?</a>
-                
-                    <!-- Botão de Login -->
                     <button class="btn btn-second">Entrar</button>
                 </form>
             </div>
         </div>
     </div>
     <script src="{% static 'js/app.js' %}"></script>
-    <script src="{% static 'js/format.js' %}"></script>
     <script src="{% static 'js/password-toggle.js' %}"></script>
 </body>
 </html>

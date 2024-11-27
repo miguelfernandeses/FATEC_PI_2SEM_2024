@@ -342,6 +342,34 @@ input:-webkit-autofill
     animation: deslocamentoDir 1.3s; /*MODIFIQUEI DE 3s PARA 1.3s*/
 }
 
+.error-box {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.error-message {
+    color: #721c24;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.error-message i {
+    margin-right: 5px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #721c24;
+    font-size: 14px;
+    cursor: pointer;
+}
 /*ANIMAÇÃOO CSS PARA O CONTEÚDO*/
 
 @keyframes deslocamentoEsq {
