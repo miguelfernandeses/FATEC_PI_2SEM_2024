@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comparar Produto - {{ produto.name }}</title>
+    <title>Comparar Produto</title>
+    <link rel="icon" href="{% static 'img/search.png' %}" type="image/png">
     <link rel="stylesheet" href="{% static 'css/products.css' %}">
 </head>
 <body>
@@ -36,15 +37,36 @@
             <div class="other-pharmacies-list">
                 {% for farmacia in outras_farmacias %}
                     <div class="other-pharmacy">
-                        <h3>{{ farmacia.nome_farmacia }}</h3>
-                        <p><strong>Preço:</strong> R$ {{ farmacia.price }}</p>
-                        <a href="/produtos/{{ farmacia.ean }}/{{ farmacia.nome_farmacia|urlencode }}/" class="view-product-link">Ver Produto</a>
+                        <div class="pharmacy-logo">
+                            {% if farmacia.nome_farmacia == "Ultrafarma" %}
+                                <img src="{% static 'img/ultrafarma.png' %}" alt="Logo Ultrafarma">
+                            {% elif farmacia.nome_farmacia == "Preço Popular" %}
+                                <img src="{% static 'img/precopopular.png' %}" alt="Logo Preço Popular">
+                            {% elif farmacia.nome_farmacia == "Pague Menos" %}
+                                <img src="{% static 'img/paguemenos.png' %}" alt="Logo Pague Menos">
+                            {% elif farmacia.nome_farmacia == "Lecer" %}
+                                <img src="{% static 'img/lecer.png' %}" alt="Logo Lecler">
+                            {% elif farmacia.nome_farmacia == "Drogaria São Paulo" %}
+                                <img src="{% static 'img/dsp.png' %}" alt="Logo Drogaria São Paulo">
+                            {% elif farmacia.nome_farmacia == "Drogaria Catarinense" %}
+                                <img src="{% static 'img/ctr.png' %}" alt="Logo Droga Raia">
+                            {% elif farmacia.nome_farmacia == "Drogarias Pacheco" %}
+                                <img src="{% static 'img/pacheco.png' %}" alt="Logo Pacheco">
+                            {% elif farmacia.nome_farmacia == "Extrafarma" %}
+                                <img src="{% static 'img/extrafarma.png' %}" alt="Logo Extrafarma">
+                            {% endif %}
+                        </div>
+                        <div>
+                            <h3>{{ farmacia.nome_farmacia }}</h3>
+                            <p><strong>Preço:</strong> R$ {{ farmacia.price }}</p>
+                            <a href="/produtos/{{ farmacia.ean }}/{{ farmacia.nome_farmacia|urlencode }}/" class="view-product-link">Ver Produto</a>
+                        </div>
                     </div>
                 {% empty %}
                     <p>Nenhuma outra farmácia encontrada.</p>
                 {% endfor %}
             </div>
         </div>
-    </div>
+        
 </body>
 </html>

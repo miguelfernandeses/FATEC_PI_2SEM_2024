@@ -74,17 +74,14 @@ body {
 
 .price_old {
     text-decoration: line-through;
-<<<<<<< Updated upstream
     color: #777; /* Cor cinza opcional para destacar o preço antigo */
 }
 .price {
     font-weight: bold; /* Destacar o preço atual */
-=======
     color: #777;
 }
 .price {
     font-weight: bold; 
->>>>>>> Stashed changes
     color: #000;
 }
 
@@ -139,36 +136,67 @@ body {
     letter-spacing: 1px;
 }
 
-/* Lista de farmácias */
 .other-pharmacies-list {
     display: flex;
     flex-direction: column; /* Alinha as farmácias em coluna */
     gap: 20px;
+    align-items: center;
 }
 
+
 .other-pharmacy {
-    background-color: #e6f7ff; /* Fundo azul claro */
+    background-color: white; /* Fundo branco */
+    border: 2px solid #003366; /* Borda azul */
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    display: flex;
+    flex-direction: row; /* Itens ficam lado a lado */
+    align-items: center; /* Alinha os itens no centro verticalmente */
+    position: relative; /* Permite que o botão seja posicionado à direita */
     width: 100%;
+    max-width: 800px; /* Limita a largura para não ficar muito largo */
+    height: 130px;
+    margin: 10px auto; /* Centraliza o card na tela */
+    gap: 20px; /* Espaçamento entre a imagem e os textos */
+}
+
+.other-pharmacy img {
+    width: 120px; /* Ajuste o tamanho da imagem conforme necessário */
+    height: auto;
+    border-radius: 8px;
+    flex-shrink: 0; /* Garante que a imagem não seja redimensionada */
+    margin-right: 110px;
 }
 
 .other-pharmacy h3 {
     font-size: 1.5rem;
     color: #003366; /* Azul forte */
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    text-align: left; /* Mantém o título alinhado à esquerda */
     font-weight: 600;
+    margin-left: 20px; /* Ajusta a margem para manter uma boa distância */
 }
 
+/* Estilo para o parágrafo */
 .other-pharmacy p {
     font-size: 1.1rem;
     color: #555;
     margin-bottom: 10px;
     line-height: 1.4;
+    text-align: left; /* Centraliza o texto dentro do card */
+    margin-left: 20px; /* Ajusta a margem para o texto não encostar na borda */
 }
 
+.other-pharmacy .pharmacy-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centraliza os textos verticalmente */
+    flex-grow: 1; /* Garante que os textos ocupem o restante do espaço */
+    align-items: center; /* Centraliza os textos horizontalmente */
+}
+
+/* Botão */
 .view-product-link {
     display: inline-block;
     background-color: #003366; /* Azul forte */
@@ -178,6 +206,9 @@ body {
     font-weight: bold;
     border-radius: 8px;
     transition: background-color 0.3s ease;
+    position: absolute; /* O botão é posicionado em relação ao contêiner */
+    right: 20px; /* Alinha o botão à direita */
+    top: 50px; /* Ajuste a distância do fundo */
 }
 
 .view-product-link:hover {
