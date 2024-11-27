@@ -70,16 +70,44 @@ def auth_view(request):
         "form_login": form_login,
     })
 
-#logout
+#
+@login_required
 def logout_view(request):
     logout(request)
     logger.info("Usuário deslogado")
     return redirect('core:index')
 
-#meuperfil
 @login_required
-def meu_perfil(request):
-    return render(request, 'meu_perfil.html', {'usuario': request.user})
+def minha_conta(request):
+    if request.user.is_authenticated:
+        try:
+            cadastro = CadastroModel.objects.get(id=request.user.id)
+        except CadastroModel.DoesNotExist:
+            cadastro = None
+    else:
+        cadastro = None
+    
+    return render(request, 'minha_conta.html', {'cadastro': cadastro})
+
+def editar_conta_view(request):
+    if request.method == 'POST':
+        form = CadastroForm(request.POST)
+        
+        if form.is_valid():
+            # Log para verificar os dados enviados no POST
+            logging.debug(f"Formulário válido. Dados recebidos: {form.cleaned_data}")
+            form.save()
+            return redirect('minha-conta')
+        else:
+            # Caso o formulário não seja válido, mostre erros
+            logging.debug(f"Erros no formulário: {form.errors}")
+    else:
+        # Carregar dados existentes para o formulário
+        cadastro = CadastroModel.objects.get(id=request.user.id)
+        form = CadastroForm(instance=cadastro)
+
+    return render(request, 'editar_conta.html', {'form': form})
+
 
 def get_plano(plano_id):
     planos = {

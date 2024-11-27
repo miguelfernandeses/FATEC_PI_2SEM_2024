@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Minha Conta</title>
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body>
+    <header class="header">
+        <nav>
+            <a href="{% url 'core:index' %}">
+                <img src="{% static 'img/logo.png' %}" alt="Logo" class="logo">
+            </a>   
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <button class="btn-nav" id="user-menu-button">
+                        <a href="#" class="nav-link" aria-label="Perfil de {{ user.username }}">
+                            <i class="bi bi-person-circle"></i> {{ user.username }}
+                        </a>
+                    </button>
+                    <div class="sidebar-menu" id="sidebar-menu">
+                        <ul>
+                            <li><a href="{% url 'core:index' %}#plans"><i class="bi bi-arrow-up-circle"></i> Subir Plano</a></li>
+                            <li><a href="{% url 'core:main' %}"><i class="bi bi-box"></i> Produtos</a></li>
+                            <li><a href="{% url 'core:logout' %}"><i class="bi bi-box-arrow-right"></i> Sair</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+<div class="container mt-5">
+    <h1>Atualizar Conta</h1>
+    <div class="card">
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+                
+                <!-- Campo de Razão Social -->
+                <label class="label-input" for="empresa_razao_social">
+                    <i class="fas fa-id-badge icon-modify"></i>
+                    <input type="text" id="empresa_razao_social" name="razao_social" placeholder="Razão Social" value="{{ form_cadastro.razao_social.value|default:'' }}">
+                </label>
+                {% for error in form_cadastro.razao_social.errors %}
+                    <div class="error-message">{{ error }}</div>
+                {% endfor %}
+                
+                <label class="label-input" for="telefone">
+                    <i class="fas fa-phone icon-modify"></i>
+                    <input type="text" id="telefone" name="telefone" placeholder="Telefone" value="{{ form_cadastro.telefone.value|default:'' }}">
+                </label>
+                {% for error in form_cadastro.telefone.errors %}
+                    <div class="error-message">{{ error }}</div>
+                {% endfor %}
+                
+                <label class="label-input" for="endereco">
+                    <i class="fas fa-map-marker-alt icon-modify"></i>
+                    <input type="text" id="endereco" name="endereco" placeholder="Endereço" value="{{ form_cadastro.endereco.value|default:'' }}">
+                </label>
+                {% for error in form_cadastro.endereco.errors %}
+                    <div class="error-message">{{ error }}</div>
+                {% endfor %}
+                
+
+                <!-- Botão para salvar alterações -->
+                <button type="submit" class="btn btn-primary mt-3">Salvar Alterações</button>
+            </form>
+        </div>
+    </div>
+</div>
