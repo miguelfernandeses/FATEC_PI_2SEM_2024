@@ -9,12 +9,8 @@ from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
-<<<<<<< Updated upstream
-from django.db.models import Q
-=======
 from django.db.models import Q 
 
->>>>>>> Stashed changes
 
 logger = logging.getLogger(__name__)
 
@@ -142,11 +138,7 @@ def selecionar_plano(request):
 @login_required
 def lista_produtos(request):
     produtos_dsp = Produto.objects.filter(nome_farmacia__iexact="Drogaria São Paulo", price__gt=0)[:20]
-<<<<<<< Updated upstream
-    produtos_pacheco = Produto.objects.filter(nome_farmacia__iexact="Drogarias Pacheco",  price__gt=0)[:20]
-=======
     produtos_dograriapacheco = Produto.objects.filter(nome_farmacia__iexact="Drogarias Pacheco",  price__gt=0)[:20]
->>>>>>> Stashed changes
     produtos_extrafarma = Produto.objects.filter(nome_farmacia__iexact="Extrafarma",  price__gt=0)[:20]
 
     try:
@@ -157,11 +149,7 @@ def lista_produtos(request):
 
     return render(request, 'main.html', {
         'produtos_dsp': produtos_dsp,
-<<<<<<< Updated upstream
-        'produtos_pacheco': produtos_pacheco,
-=======
         'produtos_drogariapacheco': produtos_dograriapacheco,
->>>>>>> Stashed changes
         'produtos_extrafarma': produtos_extrafarma,
         'consultas_restantes': consultas_restantes,
     })
@@ -267,7 +255,3 @@ def busca(request):
         return JsonResponse({'produtos': produtos_data, 'has_next': produtos_page.has_next()})
 
     return render(request, 'busca_resultados.html', {'produtos': produtos_page, 'query': query})
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
