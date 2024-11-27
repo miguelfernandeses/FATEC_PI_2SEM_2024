@@ -13,7 +13,7 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('produto/<str:name>/<str:nome_farmacia>/', views.produto_detalhes, name='produto_detalhes'),
     path('produtos/<str:ean>/<str:nome_farmacia>/', views.produtos_detalhe, name='produtos_detalhes'),
-    path('busca/', views.busca, name='busca'),
+    path('busca/', views.busca, name='busca'), 
 ] 
 
     

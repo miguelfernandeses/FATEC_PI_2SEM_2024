@@ -9,7 +9,7 @@ from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
-
+from django.db.models import Q
 
 logger = logging.getLogger(__name__)
 
@@ -137,8 +137,8 @@ def selecionar_plano(request):
 @login_required
 def lista_produtos(request):
     produtos_dsp = Produto.objects.filter(nome_farmacia__iexact="Drogaria São Paulo", price__gt=0)[:20]
-    produtos_paguemenos = Produto.objects.filter(nome_farmacia__iexact="Pague Menos",  price__gt=0)[:20]
-    produtos_precopopular = Produto.objects.filter(nome_farmacia__iexact="Preço Popular",  price__gt=0)[:20]
+    produtos_pacheco = Produto.objects.filter(nome_farmacia__iexact="Drogarias Pacheco",  price__gt=0)[:20]
+    produtos_extrafarma = Produto.objects.filter(nome_farmacia__iexact="Extrafarma",  price__gt=0)[:20]
 
     try:
         usuario = CadastroModel.objects.get(id=request.user.id)
@@ -148,8 +148,8 @@ def lista_produtos(request):
 
     return render(request, 'main.html', {
         'produtos_dsp': produtos_dsp,
-        'produtos_paguemenos': produtos_paguemenos,
-        'produtos_precopopular': produtos_precopopular,
+        'produtos_pacheco': produtos_pacheco,
+        'produtos_extrafarma': produtos_extrafarma,
         'consultas_restantes': consultas_restantes,
     })
 
@@ -159,11 +159,13 @@ def search(request):
     query = request.GET.get('q', '')
     page = int(request.GET.get('page', 1))
     limit = 30  # Limitando a 30 produtos
-    
+
     if query:
-        produtos = Produto.objects.filter(name__icontains=query)
-    
-    
+        # Adiciona a validação para não trazer produtos com price igual a 0
+        produtos = Produto.objects.filter(
+            Q(name__icontains=query) & ~Q(price=0)
+        )
+        
         if produtos.exists():
             paginator = Paginator(produtos, limit)
             produtos_pagina = paginator.get_page(page)
@@ -244,6 +246,7 @@ def busca(request):
                 'name': produto.name,
                 'price': produto.price,
                 'images': produto.images,
+                'farmacia': produto.nome_farmacia,
                 'produto_url': f"/produto/{produto.name}/{produto.nome_farmacia}/"
             }
             for produto in produtos_page

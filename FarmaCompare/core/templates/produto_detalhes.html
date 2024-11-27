@@ -19,20 +19,24 @@
                 <img src="{{ produto.images }}" alt="{{ produto.name }}">
             </div>
             <div class="product-info">
+                {% if produto.price_old and produto.price_old != produto.price %}
+                <p class="price_old">R$ {{ produto.price_old }}</p>
+                {% endif %}
                 <p class="price">R$ {{ produto.price }}</p>
+                <p><strong>Marca:</strong> {{ produto.brand }}</p>
                 <p><strong>Descrição:</strong> {{ produto.description }}</p>
                 <p><strong>Substância:</strong> {{ produto.substance }}</p>
             </div>
         </div>
         
-        <div class="other-pharmacies">
+        <div class="other-pharmacies"> 
             <h2>Comparar Preços em Outras Farmácias</h2>
             <div class="other-pharmacies-list">
                 {% for farmacia in outras_farmacias %}
                     <div class="other-pharmacy">
                         <h3>{{ farmacia.nome_farmacia }}</h3>
                         <p><strong>Preço:</strong> R$ {{ farmacia.price }}</p>
-                        <a href="/produtos/{{ produto.ean }}/{{ farmacia.nome_farmacia|urlencode }}/" class="view-product-link">Ver Produto</a>
+                        <a href="/produtos/{{ farmacia.ean }}/{{ farmacia.nome_farmacia|urlencode }}/" class="view-product-link">Ver Produto</a>
                     </div>
                 {% empty %}
                     <p>Nenhuma outra farmácia encontrada.</p>

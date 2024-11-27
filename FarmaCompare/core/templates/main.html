@@ -48,31 +48,21 @@
         </nav>
     </header>
     
-    <div class="banner">
-        <img src="https://storage.googleapis.com/a1aa/image/9R3PBZonyWbIOBAOlvaPWGMEQKUhZTXGkMOEpe40vuVzuY0JA.jpg"
-             alt="Banner promocional">
-    </div>
 
-    {% if user.is_authenticated %}
-    <div class="consultas-info">
-        <p>Consultas restantes: 
-            {% if consultas_restantes == 999 %}
-                Ilimitado
-            {% else %}
-                {{ consultas_restantes }}
-            {% endif %}
-        </p>
-    </div>
-    {% endif %}
+<div class="banner">
+    <img src="{% static 'img/banner.jfif' %}" alt="Banner promocional">
+</div>
 
     <div class="product-gallery">
         <div class="product-container">
             {% for product in produtos_dsp %}
             <div class="product-card">
                 <img src="{{ product.images }}" alt="{{ product.name }}">
-                <p>{{ product.name }}</p>
-                <p class="price">Preço: R$ {{ product.price }}</p>
-                <p>Farmácia: {{ product.nome_farmacia }}</p>
+                <h2 class="product-name">{{ product.name }}</h2>
+                <h3 class="price">Preço: R$ {{ product.price }}</h3>
+                <div class="pharmacy-footer">
+                    <span>{{ product.nome_farmacia }}</span>
+                </div>
             </div>
             {% empty %}
             <p>Nenhum produto encontrado para a dsp.</p>
@@ -82,48 +72,76 @@
     
     <div class="product-gallery">
         <div class="product-container">
-            {% for product in produtos_paguemenos %}
-                <div class="product-card">
-                    <img src="{{ product.images }}" alt="{{ product.name }}">
-                    <p>{{ product.name }}</p>
-                    <p class="price">Preço: R$ {{ product.price }}</p>
-                    <p>Farmácia: {{ product.nome_farmacia }}</p>
+            {% for product in produtos_pacheco %}
+            <div class="product-card">
+                <img src="{{ product.images }}" alt="{{ product.name }}">
+                <h2 class="product-name">{{ product.name }}</h2>
+                <h3 class="price">Preço: R$ {{ product.price }}</h3>
+                <div class="pharmacy-footer">
+                    <span>{{ product.nome_farmacia }}</span>
                 </div>
+            </div>
             {% empty %}
-                <p>Nenhum produto encontrado para a Pague Menos.</p>
+            <p>Nenhum produto encontrado para a dsp.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="product-gallery">
+        <div class="product-container">
+            {% for product in produtos_extrafarma %}
+            <div class="product-card">
+                <img src="{{ product.images }}" alt="{{ product.name }}">
+                <h2 class="product-name">{{ product.name }}</h2>
+                <h3 class="price">Preço: R$ {{ product.price }}</h3>
+                <div class="pharmacy-footer">
+                    <span>{{ product.nome_farmacia }}</span>
+                </div>
+            </div>
+            {% empty %}
+            <p>Nenhum produto encontrado para a dsp.</p>
             {% endfor %}
         </div>
     </div>
 
     <div class="farmacias-parceiras">
-        <h2>Farmácias Parceiras</h2> 
+        <h2>Farmácias Parceiras</h2>
         <div class="farmacias-container">
             <div class="farmacia">
-                <img src="{% static 'img/ultrafarma.png' %}">
+                    <img src="{% static 'img/ultrafarma.png' %}" alt="Ultrafarma">
+                </a>
             </div>
             <div class="farmacia">
-                <img src="{% static 'img/precopopular.png' %}">
+                    <img src="{% static 'img/precopopular.png' %}" alt="Preço Popular">
+                </a>
             </div>
             <div class="farmacia">
-                <img src="{% static 'img/paguemenos.png' %}">
+                    <img src="{% static 'img/paguemenos.png' %}" alt="Pague Menos">
+                </a>
             </div>
             <div class="farmacia">
-                <img src="{% static 'img/lecer.png' %}">
+                    <img src="{% static 'img/lecer.png' %}" alt="Lecler">
+                </a>
             </div>
             <div class="farmacia">
-                <img src="{% static 'img/dsp.png' %}">
+                    <img src="{% static 'img/dsp.png' %}" alt="Drogaria São Paulo">
+                </a>
             </div>
             <div class="farmacia">
-                <img src="{% static 'img/ctr.png' %}">
+                    <img src="{% static 'img/ctr.png' %}" alt="Droga Raia">
+                </a>
             </div>
             <div class="farmacia">
-                <img src="{% static 'img/pacheco.png' %}">
+                    <img src="{% static 'img/pacheco.png' %}" alt="Pacheco">
+                </a>
             </div>
             <div class="farmacia">
-                <img src="{% static 'img/extrafarma.png' %}">
+                    <img src="{% static 'img/extrafarma.png' %}" alt="Extrafarma">
+                </a>
             </div>
         </div>
     </div>
+    
     
     <footer class="footer">
         <div class="contact-info">
@@ -153,7 +171,7 @@
     <script src="{% static 'js/menu.js' %}"></script>
     <script src="{% static 'js/dropdown.js' %}"></script>
     <script src="{% static 'js/product-slider.js' %}"></script>
-    <script src="{% static 'js/searchh.js' %}"></script>
+    <script src="{% static 'js/search.js' %}"></script>
 </body>
 </html>
     

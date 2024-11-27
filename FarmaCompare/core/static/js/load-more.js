@@ -12,29 +12,39 @@ document.addEventListener("DOMContentLoaded", () => {
                     "X-Requested-With": "XMLHttpRequest",
                 },
             })
-                .then((response) => response.json())
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error('Falha na requisição');
+                    }
+                    return response.json();
+                })
                 .then((data) => {
-                    data.produtos.forEach((product) => {
+                    console.log(data); 
+
+                    data.produtos.forEach((produto) => {
+                        const nomeFarmacia = produto.farmacia || 'desconhecida'; 
+
                         const productItem = document.createElement("div");
                         productItem.classList.add("product-item");
 
                         productItem.innerHTML = `
-                        <img src="${product.images}" alt="${product.name}">
-                        <h2>${product.name}</h2>
-                        <p>Preço: R$ ${product.price}</p>
-                        <a href="/produto/${encodeURIComponent(product.name)}/${encodeURIComponent(product.nome_farmacia)}/" class="view-product-button">Ver Produto</a>
+                            <img src="${produto.images}" alt="${produto.name}">
+                            <h2>${produto.name}</h2>
+                            <p class="price">Preço: R$ ${produto.price}</p>
+                            <a href="/produto/${encodeURIComponent(produto.name)}/${encodeURIComponent(nomeFarmacia)}/" class="view-product-button">Ver Produto</a>
                         `;
-
                         productsContainer.appendChild(productItem);
-                    });
+                    }); 
 
                     if (data.has_next) {
                         loadMoreBtn.setAttribute("data-page", parseInt(nextPage) + 1);
                     } else {
-                        loadMoreBtn.style.display = "none";
+                        loadMoreBtn.style.display = "none"; 
                     }
                 })
-                .catch((error) => console.error("Erro ao carregar mais produtos:", error));
+                .catch((error) => {
+                    console.error("Erro ao carregar mais produtos:", error);
+                });
         });
     }
 });
