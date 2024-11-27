@@ -24,18 +24,16 @@ class Command(BaseCommand):
             with open(os.path.join(data_folder, csv_file), newline='', encoding='utf-8') as f:
                 reader = csv.DictReader(f)
                 for row in reader:
-                    # Validação e limpeza do campo 'price'
                     price_raw = row.get('price', '').replace("R$", "").replace(",", ".").strip()
-                    if not price_raw:  # Caso esteja vazio, atribuir 0 como padrão
+                    if not price_raw:  
                         price_raw = "0"
                     try:
                         price = Decimal(price_raw)
                     except (ValueError, InvalidOperation):
                         raise ValidationError(f"Preço inválido: {row.get('price')}")
 
-                    # Validação e limpeza do campo 'price_old'
                     price_old_raw = row.get('price_old', '').replace("R$", "").replace(",", ".").strip()
-                    if not price_old_raw:  # Caso esteja vazio, definir como None
+                    if not price_old_raw:  
                         price_old = None
                     else:
                         try:
