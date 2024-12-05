@@ -1,6 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class CadastroModel(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     email = models.EmailField(unique=True)
     razao_social = models.CharField(max_length=150, null=True, blank=True)
     cnpj = models.CharField(max_length=30, unique=True, null=True, blank=True)

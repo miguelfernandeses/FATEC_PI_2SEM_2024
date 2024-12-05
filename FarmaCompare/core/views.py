@@ -11,6 +11,7 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
 from django.db.models import Q 
 from django.contrib import messages
+from .forms import EditarCadastroForm
 
 
 logger = logging.getLogger(__name__)
@@ -89,25 +90,23 @@ def minha_conta(request):
     
     return render(request, 'minha_conta.html', {'cadastro': cadastro})
 
-def editar_conta_view(request):
+@login_required
+def editar_conta(request):
+    cadastro = CadastroModel.objects.get(id=request.user.id)
+    
     if request.method == 'POST':
-        form = CadastroForm(request.POST)
+        form = EditarCadastroForm(request.POST, instance=cadastro)
         
         if form.is_valid():
-            # Log para verificar os dados enviados no POST
-            logging.debug(f"Formulário válido. Dados recebidos: {form.cleaned_data}")
             form.save()
+            messages.success(request, "Informações atualizadas com sucesso!")
             return redirect('minha-conta')
         else:
-            # Caso o formulário não seja válido, mostre erros
             logging.debug(f"Erros no formulário: {form.errors}")
     else:
-        # Carregar dados existentes para o formulário
-        cadastro = CadastroModel.objects.get(id=request.user.id)
-        form = CadastroForm(instance=cadastro)
+        form = EditarCadastroForm(instance=cadastro)
 
-    return render(request, 'editar_conta.html', {'form': form})
-
+    return render(request, 'editar-conta.html', {'form': form})
 
 def get_plano(plano_id):
     planos = {

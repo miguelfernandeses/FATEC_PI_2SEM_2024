@@ -22,6 +22,12 @@ class CadastroForm(forms.ModelForm):
             'senha': {'required': "Erro ao informar o campo senha."},
         }
 
+class EditarCadastroForm(forms.ModelForm):
+    class Meta:
+        model = CadastroModel
+        fields = ['email', 'razao_social', 'cnpj', 'telefone', 'endereco']
+        
+
     def clean_razao_social(self):
         razao_social = self.cleaned_data['razao_social']
         if CadastroModel.objects.filter(razao_social=razao_social).exists():
@@ -92,6 +98,11 @@ class CadastroForm(forms.ModelForm):
 
         login(request, user)
         return user
+
+class EditarCadastroForm(forms.ModelForm):
+    class Meta:
+        model = CadastroModel
+        fields = ['email', 'razao_social', 'cnpj', 'telefone', 'endereco']
 
 
 class LoginForm(forms.Form):
